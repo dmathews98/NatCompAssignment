@@ -1,15 +1,23 @@
 import numpy as np
+import matplotlib.pyplot as plt
 from scipy.special import expit
 import itertools
 
-def generate_data_set(M, s, noise_percent):
+def generate_data_set(M, s, noise_scale):
     x1_mu = np.array([2 for i in range(M)])
     x_1_mu = np.array([-2 for i in range(M)])
 
-    x1_set = np.random.multivariate_normal(x1_mu, noise_percent*np.identity(M), size=(int(s/2.0)))
-    x_1_set = np.random.multivariate_normal(x_1_mu, noise_percent*np.identity(M), size=(int(s/2.0)))
+    noise = 2.0*noise_scale
+
+    x1_set = np.random.multivariate_normal(x1_mu, noise*np.identity(M), size=(int(s/2.0)))
+    x_1_set = np.random.multivariate_normal(x_1_mu, noise*np.identity(M), size=(int(s/2.0)))
 
     return np.vstack([x1_set, x_1_set])
+
+def plot_data(x_set, s):
+    plt.plot(x_set[0:int(s/2.0), 0], x_set[0:int(s/2.0), 1], 'r.')
+    plt.plot(x_set[int(s/2.0):s, 0], x_set[int(s/2.0):s, 1], 'b.')
+    plt.show()
 
 # Sigmoid
 def output_func(w, x):
@@ -120,13 +128,14 @@ class PSO: # all the material that is relavant at swarm leveel
                     print('')
 
 def main():
+    np.random.seed(22)
     M = 2
-    s = 2
-    noise_percent = 0.01
+    s = 100
+    noise_scale = 0.5
 
-    x_set = generate_data_set(M=M, s=s, noise_percent=noise_percent)
-    print(x_set)
+    x_set = generate_data_set(M=M, s=s, noise_scale=noise_scale)
+    plot_data(x_set, s)
 
-    PSO(dim=M, w=0.75, a1=2.02, a2=2.02, population_size=5, time_steps=1001, search_range=1.0, x_set=x_set, s=s).run()
+    # PSO(dim=M, w=0.75, a1=2.02, a2=2.02, population_size=5, time_steps=1001, search_range=1.0, x_set=x_set, s=s).run()
 
 main()
