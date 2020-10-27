@@ -9,6 +9,8 @@ import operator
 from InstructorPSOCode import *
 from ModelCode import *
 
+fignum = 0
+
 class DataParameters:
     M = 2 # Dimension
     s = 1000 # Data quantity
@@ -59,6 +61,7 @@ def plot_data(data, labels, nn=None, gridsize=30):
     If nn is not None, we plot the decision boundary
     of the NN with the best weights
     """
+    global fignum
     rplot = np.array([
         x for x, y in zip(data, labels) if y == 1
     ])
@@ -81,7 +84,8 @@ def plot_data(data, labels, nn=None, gridsize=30):
     plt.plot(rplot[:, 0], rplot[:, 1], 'r.')
     plt.plot(bplot[:, 0], bplot[:, 1], 'b.')
 
-    plt.show()
+    plt.savefig(f"fig{fignum}.png")
+    fignum += 1
 
 # We REALLY need the [-1, 1] constraint, otherwise
 # the weights rapidly blow up
