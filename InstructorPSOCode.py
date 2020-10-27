@@ -1,6 +1,3 @@
-import numpy as np
-import math
-
 # From the tutorial!  Most of the code here is **not written by us**
 # However I have modified this to take into account repulsive forces
 # and fixed a bug (in main code, a1 is ignored and both params use a2)
@@ -123,7 +120,7 @@ class PSO: # all the material that is relavant at swarm leveel
                     self.best_swarm_fitness = new_fitness
                     self.best_swarm_pos = new_position
 
-            if (t  + 1) % int(math.ceil(self.time_steps / 10)) == 0 or t == self.time_steps - 1: #we print only two components even it search space is high-dimensional
+            if (t  + 1) % int(math.ceil(self.time_steps / 20)) == 0 or t == self.time_steps - 1: #we print only two components even it search space is high-dimensional
                 print(("Time: %6d,  Best Fitness: %14.6f") % (t,self.best_swarm_fitness), end ="\n")
                 print("Best Pos: " + str(self.best_swarm_pos) + "\n")
         return (list(zip(*[x.position for x in self.swarm])), self.best_swarm_pos)

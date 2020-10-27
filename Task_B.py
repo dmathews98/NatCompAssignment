@@ -1,11 +1,11 @@
-from InstructorPSOCode import *
-from ModelCode import *
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.special import expit
 import itertools
 import tensorflow as tf
 import math
+import functools
+import operator
 
 class DataParameters:
     M = 2 # Dimension
@@ -140,7 +140,11 @@ def fitness_func(pos, dim, x_set, s):
     return c
 
 
-def main():
+def main(**kwargs):
+    print(
+        "ARGS: ",
+        kwargs
+    )
     np.random.seed(22)
     noise_scale = 0.5
 
@@ -159,17 +163,22 @@ def main():
 
     swarm, best = PSO(
         dim=dimensions,
-        w=0.75,
-        a1=2.02,
-        a2=2.02,
-        a3=0,
-        population_size=5,
-        time_steps=101,
-        search_range=1.0,
         fitness_func=fitness,
-        constrainer=mapcap
+        **kwargs
     ).run()
     nn.set_weights(best)
     plot_data(datarr, labarr, nn)
 
-main()
+for w in (0.7, 0.9):
+    for a1 in (1, 2, 3):
+        for pop in (5, 30):
+            main(
+                w=w,
+                a1=a1,
+                a2=4-a1,
+                a3=0,
+                population_size=pop,
+                time_steps=1001,
+                search_range=1.0,
+                constrainer=mapcap
+            )

@@ -1,8 +1,3 @@
-import tensorflow as tf
-import functools
-import operator
-import numpy as np
-
 # I'm not sure which network we'll use, so I'm gonna make the model code be general
 class PSOTrainable():
     """
