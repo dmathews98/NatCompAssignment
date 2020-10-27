@@ -1,23 +1,127 @@
+from InstructorPSOCode import *
+from ModelCode import *
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.special import expit
 import itertools
+import tensorflow as tf
+import math
+
+class DataParameters:
+    M = 2 # Dimension
+    s = 1000 # Data quantity
+    Q = 3 # Question #, 1 or 3
 
 def generate_data_set(M, s, noise_scale):
-    x1_mu = np.array([2 for i in range(M)])
-    x_1_mu = np.array([-2 for i in range(M)])
+    if DataParameters.Q == 1:
+        noise = 2.0*noise_scale
+        x1_mu = np.array([2 for i in range(M)])
+        x_1_mu = np.array([-2 for i in range(M)])
 
-    noise = 2.0*noise_scale
+        x1_set = np.random.multivariate_normal(x1_mu, noise*np.identity(M), size=s//2)
+        x_1_set = np.random.multivariate_normal(x_1_mu, noise*np.identity(M), size=s//2)
+    elif DataParameters.Q == 3:
+        noise = noise_scale / 4
+        def gen_spiral(deltaT):
+            n = s//2
+            to_return = []
+            for i in range(n):
+                r = i / n * 5
+                t = 1.75 * i / n * 2 * math.pi + deltaT
+                x = (r * math.sin(t))
+                y = (r * math.cos(t))
+                to_return.append(
+                    np.random.multivariate_normal(
+                        np.array([x, y]),
+                        noise * np.identity(M),
+                        size=1
+                    )
+                )
+            return np.array(to_return)
 
-    x1_set = np.random.multivariate_normal(x1_mu, noise*np.identity(M), size=(int(s/2.0)))
-    x_1_set = np.random.multivariate_normal(x_1_mu, noise*np.identity(M), size=(int(s/2.0)))
+        x1_set = gen_spiral(0).reshape((s//2, M))
+        x_1_set = gen_spiral(math.pi).reshape((s//2, M))
 
-    return np.vstack([x1_set, x_1_set])
+    full_data = np.hstack([
+        np.vstack([x1_set, x_1_set]),
+        np.vstack([np.ones((s//2, 1)), -np.ones((s//2, 1))])
+    ])
+    np.random.shuffle(full_data)
 
-def plot_data(x_set, s):
-    plt.plot(x_set[0:int(s/2.0), 0], x_set[0:int(s/2.0), 1], 'r.')
-    plt.plot(x_set[int(s/2.0):s, 0], x_set[int(s/2.0):s, 1], 'b.')
+    # Returns data, label pair
+    return full_data[:, :-1], full_data[:, -1]
+
+def plot_data(data, labels, nn=None, gridsize=30):
+    """
+    If nn is None, plot data
+    If nn is not None, we plot the decision boundary
+    of the NN with the best weights
+    """
+    rplot = np.array([
+        x for x, y in zip(data, labels) if y == 1
+    ])
+    bplot = np.array([
+        x for x, y in zip(data, labels) if y == -1
+    ])
+
+    if nn is not None:
+        a = np.linspace(-5, 5, gridsize)
+        def contour_helper(pos):
+            to_return = nn.predict(pos.reshape(1, 2))
+            return 1 if to_return[0, 0] > 0 else -1
+        zz = np.zeros((gridsize, gridsize), dtype=np.int8)
+        for x in range(gridsize):
+            print("Drawing %d%% complete!" % int(100 * x / gridsize))
+            for y in range(gridsize):
+                zz[x, y] = (contour_helper(np.array([a[x], a[y]])))
+        plt.contourf(a, a, zz)
+
+    plt.plot(rplot[:, 0], rplot[:, 1], 'r.')
+    plt.plot(bplot[:, 0], bplot[:, 1], 'b.')
+
     plt.show()
+
+# We REALLY need the [-1, 1] constraint, otherwise
+# the weights rapidly blow up
+def cap(x):
+    if x < -1: return -1
+    if x > 1: return 1
+    return x
+
+def mapcap(x):
+    return np.array([cap(y) for y in x])
+
+def prepare_neural_net(q, datarr, labarr):
+    if q == 1:
+        nn = PSOTrainable(
+            [tf.keras.layers.Dense(units=1, dtype=np.float64)],
+            datarr
+        )
+    elif q == 3:
+        # Here we make the model
+        nn = PSOTrainable(
+            [
+                tf.keras.layers.Dense(units=6, dtype=np.float64),
+                tf.keras.layers.ReLU(dtype=np.float64), # ReLU necessary or it won't learn nonlinear stuff
+                tf.keras.layers.Dense(units=6, dtype=np.float64),
+                tf.keras.layers.ReLU(dtype=np.float64), # ReLU necessary or it won't learn nonlinear stuff
+                tf.keras.layers.Dense(units=1, dtype=np.float64) # Output layer, don't forget this!!
+            ],
+            datarr
+        )
+    nn.summary()
+
+    # Sanity check, will throw error if weight calculation fails:
+    nn.set_weights(np.array(list(range(nn.get_weight_count()))))
+    def fitness(pos):
+        nn.set_weights(pos)
+        mae = nn.evaluate(
+            x=datarr,
+            y=labarr,
+            verbose=0
+        )
+        return mae
+    return fitness, nn.get_weight_count(), nn
 
 # Sigmoid
 def output_func(w, x):
@@ -35,107 +139,37 @@ def fitness_func(pos, dim, x_set, s):
 
     return c
 
-class Particle: # all the material that is relavant at the level of the individual particles
-    
-    def __init__(self, dim, minx, maxx, x_set, s):
-        self.position = np.random.uniform(low=minx, high=maxx, size=dim)
-        self.velocity = np.random.uniform(low=-0.01, high=0.01, size=dim)
-        self.best_particle_pos = self.position
-        self.dim = dim
-        self.x_set = x_set
-        self.s = s
-
-        self.fitness = fitness_func(self.position,dim, x_set, s)
-        self.best_particle_fitness = self.fitness   # we couldd start with very large number here, 
-                                                    #but the actual value is better in case we are lucky 
-                
-    def setPos(self, pos):
-        self.position = pos
-        self.fitness = fitness_func(self.position,self.dim, self.x_set, self.s)
-        if self.fitness<self.best_particle_fitness:     # to update the personal best both 
-                                                        # position (for velocity update) and
-                                                        # fitness (the new standard) are needed
-                                                        # global best is update on swarm leven
-            self.best_particle_fitness = self.fitness
-            self.best_particle_pos = pos
-
-    def updateVel(self, inertia, a1, a2, best_self_pos, best_swarm_pos):
-                # Here we use the canonical version
-                # V <- inertia*V + a1r1 (peronal_best - current_pos) + a2r2 (global_best - current_pos)
-        cur_vel = self.velocity
-        r1 = np.random.uniform(low=0, high=1, size = self.dim)
-        r2 = np.random.uniform(low=0, high=1, size = self.dim)
-        a1r1 = np.multiply(a1, r1)
-        a2r2 = np.multiply(a2, r2)
-        best_self_dif = np.subtract(best_self_pos, self.position)
-        best_swarm_dif = np.subtract(best_swarm_pos, self.position)
-                    # the next line is the main equation, namely the velocity update, 
-                    # the velocities are added to the positions at swarm level 
-        return inertia*cur_vel + np.multiply(a1r1, best_self_dif) + np.multiply(a2r2, best_swarm_dif)
-
-class PSO: # all the material that is relavant at swarm leveel
-
-    def __init__(self, w, a1, a2, dim, population_size, time_steps, search_range, x_set, s):
-
-        # Here we use values that are (somewhat) known to be good
-        # There are no "best" parameters (No Free Lunch), so try using different ones
-        # There are several papers online which discuss various different tunings of a1 and a2
-        # for different types of problems
-        self.w = w # Inertia
-        self.a1 = a2 # Attraction to personal best
-        self.a2 = a2 # Attraction to global best
-        self.dim = dim
-        self.s = s
-        self.x_set = x_set
-
-        self.swarm = [Particle(dim,-search_range,search_range, x_set, s) for i in range(population_size)]
-        self.time_steps = time_steps
-        print('init')
-
-        # Initialising global best, you can wait until the end of the first time step
-        # but creating a random initial best and fitness which is very high will mean you
-        # do not have to write an if statement for the one off case
-        self.best_swarm_pos = np.random.uniform(low=-500, high=500, size=dim)
-        self.best_swarm_fitness = 1e100
-
-    def run(self):
-        for t in range(self.time_steps):
-            for p in range(len(self.swarm)):
-                particle = self.swarm[p]
-
-                new_position = particle.position + particle.updateVel(self.w, self.a1, self.a2, particle.best_particle_pos, self.best_swarm_pos)
-                                
-                if new_position@new_position > 1.0e+18: # The search will be terminated if the distance 
-                                                        # of any particle from center is too large
-                    print('Time:', t,'Best Pos:',self.best_swarm_pos,'Best Fit:',self.best_swarm_fitness)
-                    raise SystemExit('Most likely divergent: Decrease parameter values')
- 
-                self.swarm[p].setPos(new_position)
-
-                new_fitness = fitness_func(new_position,self.dim, self.x_set, self.s)
-
-                if new_fitness < self.best_swarm_fitness:   # to update the global best both 
-                                                            # position (for velocity update) and
-                                                            # fitness (the new group norm) are needed
-                    self.best_swarm_fitness = new_fitness
-                    self.best_swarm_pos = new_position
-
-            if t % 100 == 0: #we print only two components even it search space is high-dimensional
-                print("Time: %6d,  Best Fitness: %14.6f,  Best Pos: %9.4f,%9.4f" % (t,self.best_swarm_fitness,self.best_swarm_pos[0],self.best_swarm_pos[1]), end =" ")
-                if self.dim>2: 
-                    print('...')
-                else:
-                    print('')
 
 def main():
     np.random.seed(22)
-    M = 2
-    s = 100
     noise_scale = 0.5
 
-    x_set = generate_data_set(M=M, s=s, noise_scale=noise_scale)
-    plot_data(x_set, s)
+    datarr, labarr = generate_data_set(
+        M=DataParameters.M,
+        s=DataParameters.s,
+        noise_scale=noise_scale
+    )
+    plot_data(datarr, labarr)
 
-    # PSO(dim=M, w=0.75, a1=2.02, a2=2.02, population_size=5, time_steps=1001, search_range=1.0, x_set=x_set, s=s).run()
+    fitness, dimensions, nn = prepare_neural_net(
+        DataParameters.Q,
+        datarr,
+        labarr
+    )
+
+    swarm, best = PSO(
+        dim=dimensions,
+        w=0.75,
+        a1=2.02,
+        a2=2.02,
+        a3=0,
+        population_size=5,
+        time_steps=101,
+        search_range=1.0,
+        fitness_func=fitness,
+        constrainer=mapcap
+    ).run()
+    nn.set_weights(best)
+    plot_data(datarr, labarr, nn)
 
 main()
