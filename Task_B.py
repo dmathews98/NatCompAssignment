@@ -159,7 +159,7 @@ def main(**kwargs):
         s=DataParameters.s,
         noise_scale=noise_scale
     )
-    plot_data(datarr, labarr)
+    #plot_data(datarr, labarr)
 
     fitness, dimensions, nn = prepare_neural_net(
         DataParameters.Q,
