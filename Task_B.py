@@ -6,6 +6,8 @@ import tensorflow as tf
 import math
 import functools
 import operator
+from InstructorPSOCode import *
+from ModelCode import *
 
 class DataParameters:
     M = 2 # Dimension

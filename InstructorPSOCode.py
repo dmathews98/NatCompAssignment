@@ -1,3 +1,9 @@
+import itertools
+import functools
+import operator
+import numpy as np
+import math
+
 # From the tutorial!  Most of the code here is **not written by us**
 # However I have modified this to take into account repulsive forces
 # and fixed a bug (in main code, a1 is ignored and both params use a2)
