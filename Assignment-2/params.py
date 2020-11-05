@@ -54,3 +54,4 @@ def showout(filename):
         printout(f'Saved Figure as "[{total_imgs}]{filename}"')
         plt.savefig(DIREC + '/' + f'[{total_imgs}]{filename}')
         plt.show(block=False)
+        plt.clf()
