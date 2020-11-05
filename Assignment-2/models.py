@@ -1,7 +1,8 @@
-from master.py import *
-from nn.py import *
-from ga.py import *
-from pso.py import *
+from params import *
+from nn import *
+from ga import *
+from pso import *
+from make_data import *
 
 sgdcount = 0
 def sgd(**kwargs):

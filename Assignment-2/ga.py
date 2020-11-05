@@ -1,5 +1,5 @@
-from master.py import *
-from nn.py import *
+from params import *
+from nn import *
 
 class GA():
     def __init__(self, *, population_size, mutation_rate, crossover_rate):

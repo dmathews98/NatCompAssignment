@@ -6,6 +6,7 @@ import tensorflow as tf
 import math
 import functools
 import operator
+from pathlib import Path
 tf.get_logger().setLevel('ERROR')
 
 class DataParameters:
@@ -31,14 +32,16 @@ class DataParameters:
 COLAB = False #True
 OUTFILE = 'all_outputs.txt'
 total_imgs = 0
+DIREC = 'OUTPUTS'
+Path(DIREC).mkdir(parents=True, exist_ok=True)
 
 def printout(*args):
     if COLAB:
         print(*args)
     else:
         print(f"[SAVED TO {OUTFILE}]", *args)
-        to_save = ''.join(map(str,args))
-        f = open(OUTFILE, "a")
+        to_save = ''.join(map(str,args)) + '\n'
+        f = open(DIREC + '/' + OUTFILE, "a")
         f.write(to_save)
         f.close()
 
@@ -49,5 +52,5 @@ def showout(filename):
         plt.show()
     else:
         printout(f'Saved Figure as "[{total_imgs}]{filename}"')
-        plt.savefig(f'[{total_imgs}]{filename}')
+        plt.savefig(DIREC + '/' + f'[{total_imgs}]{filename}')
         plt.show(block=False)

@@ -1,0 +1,26 @@
+Saved Figure as "[1]full_data_plot.png"
+Saved Figure as "[2]train_data_plot.png"
+Saved Figure as "[3]test_data_plot.png"
+Saved Figure as "[1]full_data_plot.png"
+Saved Figure as "[2]train_data_plot.png"
+Saved Figure as "[3]test_data_plot.png"
+Saved Figure as "[1]full_data_plot.png"
+Saved Figure as "[2]train_data_plot.png"
+Saved Figure as "[3]test_data_plot.png"
+Saved Figure as "[1]full_data_plot.png"
+Saved Figure as "[2]train_data_plot.png"
+Saved Figure as "[3]test_data_plot.png"
+ARGS: {'population_size': 5, 'time_steps': 10, 'averaging': 10}
+Gradient Descent 1 Training for 10 Epochs with 5 per Batch
+Gradient Descent Over!  Avg Score: 1.9905165910720826 Deviation: 1.474013582176911 Best: 1.0437804460525513 Worst: 6.258124828338623
+Saved Figure as "[4]sgd_gradient_descent1_pop5_time10_avg10.png"
+Saved Figure as "[5]sgd_test_result{sgdcount}.png"
+ARGS: {'w': 0.7200497515516444, 'a1': 2.02, 'a2': 2.02, 'a3': 0.0, 'population_size': 5, 'time_steps': 10, 'search_range': 10, 'constrainer': <function run_script.<locals>.<lambda> at 0x8446afd08>}
+PSO 1 Training for 10 Epochs with Population 5
+PSO Training Over!  Score: 1.0004957914352417
+Saved Figure as "[6]pso1.png"
+ARGS: {'population_size': 12, 'time_steps': 1, 'mutation_rate': 0.1, 'crossover_rate': 0.5, 'train_epochs': 1, 'test_epochs': 10, 'batch': 5}
+GA 1 Training for 1 Generations with Population 12
+GA Best: 0.9788611531257629
+Saved Figure as "[7]plot_of_ga_accuracies_over_time.png"
+Saved Figure as "[8]ga1.png"

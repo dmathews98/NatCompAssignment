@@ -1,4 +1,5 @@
-from master.py import *
+from params import *
+from nn import *
 
 def generate_data_set(M, s, noise_scale):
     if DataParameters.Q == 1:

@@ -1,43 +1,11 @@
-from models.py import *
+from models import *
+import sys
 
-test = """
-COMMENT; Here are some quick commands you can pass in as
-COMMENT; a string for batching purposes!  I've put an example
-COMMENT; here - note that it doesn't have any default args, so all
-COMMENT; args I have here are **precisely** the args that we have available
-COMMENT; to us!  So just change the numbers or create new lines, don't
-COMMENT; change the parameter names or add/delete any.
-COMMENT; For testing purposes, I've reduced all the time_steps requirements
-COMMENT; to 10 or 1.  Multiply these by 100 for the actual timesteps I think
-COMMENT; we should use, but run this script with the small timesteps first
-COMMENT; to make sure everything is good on the server.
-COMMENT;
-COMMENT;
-COMMENT; Also, add either 'I' or 'F' to front of argument, depending
-COMMENT; on whether you want it as an int or a float
-COMMENT;
-COMMENT;
-SGD; population_size:I5, time_steps:I10, averaging:I10
-COMMENT;
-COMMENT;
-COMMENT; Instead of inertia (w), we calculate inertia in terms of alpha, by
-COMMENT; traveling along the complexity bound.  We have a new parameter,
-COMMENT; 'epsilon' which intuitively specifies how far into the complexity bound
-COMMENT; we want to go.
-COMMENT;
-COMMENT;
-PSO; total_a:F4.04, a1_percent:F0.5, epsilon:F-0.3, population_size:I5, time_steps:I10, a3:F0
-COMMENT;
-COMMENT;
-COMMENT; train/test epochs concerns how long to train each organism in the population
-COMMENT; train_epochs is used when training the GA, test_epochs is used only once at the end
-COMMENT; after we're done evolving the population, to get a final result.
-COMMENT;
-COMMENT;
-GA; population_size:I12, time_steps:I1, mutation_rate:F0.1, crossover_rate:F0.5, train_epochs:I100, test_epochs:I1000, batch:I5
-"""
+def run_script(scriptfile):
+    printout(f"\n\n===NEW BATCH: {scriptfile}===\n\n")
+    f = open(scriptfile, "r")
+    script = f.read()
 
-def run_script(script):
     line_by_line = script.strip().split('\n')
     for line in line_by_line:
         data = line.split(';')
@@ -95,4 +63,5 @@ def run_script(script):
             else:
                 printout(f"WARNING: Your process {alg} is not valid!")
 
-run_script(test)
+if __name__ == "__main__":
+    run_script(sys.argv[1])

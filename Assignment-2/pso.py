@@ -1,5 +1,5 @@
-from master.py import *
-from nn.py import *
+from params import *
+from nn import *
 
 # From the tutorial!  Most of the code here is **not written by us**
 # However I have modified this to take into account repulsive forces
