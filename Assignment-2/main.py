@@ -32,6 +32,7 @@ def run_script(scriptfile):
             elif alg == 'PSO':
                 total_a = kwargs['total_a']
                 a1_percent = kwargs['a1_percent']
+                epsilon = kwargs['epsilon']
                 def get_w(a, c):
                     """
                     Calculates w given a if we skirt along the 'region of compexity'
@@ -44,7 +45,7 @@ def run_script(scriptfile):
                     of complexity (so negative c will enter the region more!)
                     """
                     return c -np.sqrt(4*a) + a + 1
-                inertia = get_w(total_a, -0.3)
+                inertia = get_w(total_a, epsilon)
 
                 pso(
                     w=inertia,
