@@ -7,6 +7,7 @@ import math
 import functools
 import operator
 from pathlib import Path
+import typing
 tf.get_logger().setLevel('ERROR')
 
 class DataParameters:

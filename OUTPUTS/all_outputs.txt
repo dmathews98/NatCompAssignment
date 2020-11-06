@@ -20,3 +20,65 @@ GA 1 Training for 1 Generations with Population 12
 GA Best: 0.9788611531257629
 Saved Figure as "[7]plot_of_ga_accuracies_over_time.png"
 Saved Figure as "[8]ga1.png"
+Saved Figure as "[1]full_data_plot.png"
+Saved Figure as "[2]train_data_plot.png"
+Saved Figure as "[3]test_data_plot.png"
+Saved Figure as "[1]full_data_plot.png"
+Saved Figure as "[2]train_data_plot.png"
+Saved Figure as "[3]test_data_plot.png"
+Saved Figure as "[1]full_data_plot.png"
+Saved Figure as "[2]train_data_plot.png"
+Saved Figure as "[3]test_data_plot.png"
+Saved Figure as "[1]full_data_plot.png"
+Saved Figure as "[2]train_data_plot.png"
+Saved Figure as "[3]test_data_plot.png"
+Saved Figure as "[1]full_data_plot.png"
+Saved Figure as "[2]train_data_plot.png"
+Saved Figure as "[3]test_data_plot.png"
+Saved Figure as "[1]full_data_plot.png"
+Saved Figure as "[2]train_data_plot.png"
+Saved Figure as "[3]test_data_plot.png"
+
+
+===NEW BATCH: Assignment-2/batchfile.txt===
+
+
+ARGS: {'population_size': 12, 'time_steps': 1, 'mutation_rate': 0.5, 'crossover_rate': 0.1, 'flip_chance': 0.5, 'whither_rate': 0.1, 'growth_rate': 0.1, 'train_epochs': 100, 'test_epochs': 1000, 'batch': 5}
+Saved Figure as "[1]full_data_plot.png"
+Saved Figure as "[2]train_data_plot.png"
+Saved Figure as "[3]test_data_plot.png"
+
+
+===NEW BATCH: Assignment-2/batchfile.txt===
+
+
+ARGS: {'population_size': 12, 'time_steps': 1, 'mutation_rate': 0.5, 'crossover_rate': 0.1, 'flip_chance': 0.5, 'whither_rate': 0.1, 'growth_rate': 0.1, 'train_epochs': 100, 'test_epochs': 1000, 'batch': 5}
+GP 1 Training for 1 Generations with Population 12
+Saved Figure as "[1]full_data_plot.png"
+Saved Figure as "[2]train_data_plot.png"
+Saved Figure as "[3]test_data_plot.png"
+
+
+===NEW BATCH: Assignment-2/batchfile.txt===
+
+
+ARGS: {'population_size': 12, 'time_steps': 1, 'mutation_rate': 0.5, 'crossover_rate': 0.1, 'flip_chance': 0.5, 'whither_rate': 0.1, 'growth_rate': 0.1, 'train_epochs': 100, 'test_epochs': 1000, 'batch': 5}
+GP 1 Training for 1 Generations with Population 12
+GP Best: 0.024219878017902374
+ With key: ReLU[10]: (Sigmoid[5]: (Input,Input),Input)
+Saved Figure as "[4]plot_of_gp_accuracies_over_time.png"
+Saved Figure as "[5]gp1.png"
+ARGS: {'population_size': 5, 'time_steps': 10, 'averaging': 10}
+Gradient Descent 1 Training for 10 Epochs with 5 per Batch
+Gradient Descent Over!  Avg Score: 1.813852643966675 Deviation: 0.8764803333342636 Best: 1.0916011333465576 Worst: 4.031863689422607
+Saved Figure as "[6]sgd_gradient_descent1_pop5_time10_avg10.png"
+Saved Figure as "[7]sgd_test_result{sgdcount}.png"
+ARGS: {'w': 0.7200497515516444, 'a1': 2.02, 'a2': 2.02, 'a3': 0.0, 'population_size': 5, 'time_steps': 10, 'search_range': 10, 'constrainer': <function run_script.<locals>.<lambda> at 0x8480142f0>}
+PSO 1 Training for 10 Epochs with Population 5
+PSO Training Over!  Score: 0.99372398853302
+Saved Figure as "[8]pso1.png"
+ARGS: {'population_size': 12, 'time_steps': 1, 'mutation_rate': 0.1, 'crossover_rate': 0.5, 'train_epochs': 1, 'test_epochs': 10, 'batch': 5}
+GA 1 Training for 1 Generations with Population 12
+GA Best: 0.86211758852005
+Saved Figure as "[9]plot_of_ga_accuracies_over_time.png"
+Saved Figure as "[10]ga1.png"
