@@ -59,7 +59,7 @@ def run_script(scriptfile):
             elif alg == 'GA':
                 ga(**kwargs)
             elif alg == 'GP':
-                print("NOT IMPLEMENTED YET")
+                gp(**kwargs)
             else:
                 printout(f"WARNING: Your process {alg} is not valid!")
 

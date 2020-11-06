@@ -32,7 +32,7 @@ class DataParameters:
 COLAB = False #True
 OUTFILE = 'all_outputs.txt'
 total_imgs = 0
-DIREC = 'OUTPUTS'
+DIREC = 'OUTPUTS/'
 Path(DIREC).mkdir(parents=True, exist_ok=True)
 
 def printout(*args):
@@ -41,7 +41,7 @@ def printout(*args):
     else:
         print(f"[SAVED TO {OUTFILE}]", *args)
         to_save = ''.join(map(str,args)) + '\n'
-        f = open(DIREC + '/' + OUTFILE, "a")
+        f = open(DIREC + OUTFILE, "a")
         f.write(to_save)
         f.close()
 
@@ -52,6 +52,6 @@ def showout(filename):
         plt.show()
     else:
         printout(f'Saved Figure as "[{total_imgs}]{filename}"')
-        plt.savefig(DIREC + '/' + f'[{total_imgs}]{filename}')
+        plt.savefig(DIREC + f'[{total_imgs}]{filename}')
         plt.show(block=False)
         plt.clf()
