@@ -24,9 +24,10 @@ def generate_data_set(M, s, noise_scale):
         x1_set = gen_spiral(0).reshape((s//2, M))
         x_1_set = gen_spiral(math.pi).reshape((s//2, M))
 
+        # UNCOMMENT THIS TO GET NONLINEAR FEATURES
         # Insert x^2 and y^2 features.
-        x1_set = np.hstack([x1_set, x1_set**2])
-        x_1_set = np.hstack([x_1_set, x_1_set**2])
+        #x1_set = np.hstack([x1_set, x1_set**2])
+        #x_1_set = np.hstack([x_1_set, x_1_set**2])
 
     full_data = np.hstack([
         np.vstack([x1_set, x_1_set]),
@@ -96,6 +97,36 @@ def prepare_neural_net(q, traindata, trainlab, datarr, labarr):
         )
     elif q == 3:
         # Here we make the model
+        # Note this is the model for linear inputs, use other one for nonlinear
+        nn = PSOTrainable(
+            [
+                tf.keras.layers.Dense(
+                    units=6,
+                    dtype=np.float64,
+                    kernel_regularizer=tf.keras.regularizers.L2(l2=DataParameters.REGULARIZATION)
+                ),
+                tf.keras.layers.ReLU(dtype=np.float64),
+                tf.keras.layers.Dense(
+                    units=5,
+                    dtype=np.float64,
+                    kernel_regularizer=tf.keras.regularizers.L2(l2=DataParameters.REGULARIZATION)
+                ),
+                tf.keras.layers.ReLU(dtype=np.float64),
+                tf.keras.layers.Dense(
+                    units=4,
+                    dtype=np.float64,
+                    kernel_regularizer=tf.keras.regularizers.L2(l2=DataParameters.REGULARIZATION)
+                ),
+                tf.keras.layers.ReLU(dtype=np.float64),
+                tf.keras.layers.Dense(
+                    units=1,
+                    dtype=np.float64,
+                    kernel_regularizer=tf.keras.regularizers.L2(l2=DataParameters.REGULARIZATION)
+                ) # Output layer, don't forget this!!
+            ],
+            datarr
+        )
+        """
         nn = PSOTrainable(
             [
                 tf.keras.layers.Dense(
@@ -112,6 +143,7 @@ def prepare_neural_net(q, traindata, trainlab, datarr, labarr):
             ],
             datarr
         )
+        """
     nn.summary()
 
     # Sanity check, will throw error if weight calculation fails:
