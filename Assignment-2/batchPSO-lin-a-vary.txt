@@ -1,0 +1,6 @@
+PSO; total_a:F2.0, a1_percent:F0.5, epsilon:F0.53, population_size:I30, time_steps:I1000, a3:F0
+PSO; total_a:F2.5, a1_percent:F0.5, epsilon:F0.36, population_size:I30, time_steps:I1000, a3:F0
+PSO; total_a:F3.0, a1_percent:F0.5, epsilon:F0.17, population_size:I30, time_steps:I1000, a3:F0
+PSO; total_a:F3.5, a1_percent:F0.5, epsilon:F-0.05, population_size:I30, time_steps:I1000, a3:F0
+PSO; total_a:F3.9, a1_percent:F0.5, epsilon:F-0.25, population_size:I30, time_steps:I1000, a3:F0
+PSO; total_a:F3.4, a1_percent:F0.5, epsilon:F-0.01, population_size:I30, time_steps:I1000, a3:F0

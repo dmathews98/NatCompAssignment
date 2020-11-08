@@ -1,0 +1,2 @@
+SGD; population_size:I30, time_steps:I1000, averaging:I100
+SGD; population_size:I30, time_steps:I2000, averaging:I100

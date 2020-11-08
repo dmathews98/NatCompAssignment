@@ -1,0 +1,53 @@
+Saved Figure as "[1]full_data_plot.png"
+Saved Figure as "[2]train_data_plot.png"
+Saved Figure as "[3]test_data_plot.png"
+
+
+===NEW BATCH: batch1.txt===
+
+
+ARGS: {'population_size': 5, 'time_steps': 1000, 'averaging': 10}
+Gradient Descent 1 Training for 1000 Epochs with 5 per Batch
+Gradient Descent Over!  Avg Score: 0.5670493006706238 Deviation: 0.18736207145589195 Best: 0.34239470958709717 Worst: 0.9658156037330627
+Saved Figure as "[4]sgd_gradient_descent1_pop5_time1000_avg10.png"
+Saved Figure as "[5]sgd_test_result{sgdcount}.png"
+ARGS: {'population_size': 20, 'time_steps': 1000, 'averaging': 10}
+Gradient Descent 2 Training for 1000 Epochs with 20 per Batch
+Gradient Descent Over!  Avg Score: 0.4752789229154587 Deviation: 0.21938563192128113 Best: 0.21454408764839172 Worst: 0.8253902196884155
+Saved Figure as "[6]sgd_gradient_descent2_pop20_time1000_avg10.png"
+Saved Figure as "[7]sgd_test_result{sgdcount}.png"
+ARGS: {'w': 0.7200497515516444, 'a1': 2.02, 'a2': 2.02, 'a3': 0.0, 'population_size': 5, 'time_steps': 1000, 'search_range': 10, 'constrainer': <function run_script.<locals>.<lambda> at 0x7f32887079d0>}
+PSO 1 Training for 1000 Epochs with Population 5
+PSO Training Over!  Score: 0.923659086227417
+Saved Figure as "[8]pso1.png"
+ARGS: {'w': 0.7200497515516444, 'a1': 2.02, 'a2': 2.02, 'a3': 0.0, 'population_size': 20, 'time_steps': 1000, 'search_range': 10, 'constrainer': <function run_script.<locals>.<lambda> at 0x7f329af54a60>}
+PSO 2 Training for 1000 Epochs with Population 20
+Saved Figure as "[1]full_data_plot.png"
+Saved Figure as "[2]train_data_plot.png"
+Saved Figure as "[3]test_data_plot.png"
+
+
+===NEW BATCH: batch1.txt===
+
+
+ARGS: {'w': 0.7200497515516444, 'a1': 2.02, 'a2': 2.02, 'a3': 0.0, 'population_size': 20, 'time_steps': 1000, 'search_range': 10, 'constrainer': <function run_script.<locals>.<lambda> at 0x7f960fad69d0>}
+PSO 1 Training for 1000 Epochs with Population 20
+Saved Figure as "[1]full_data_plot.png"
+Saved Figure as "[2]train_data_plot.png"
+Saved Figure as "[3]test_data_plot.png"
+
+
+===NEW BATCH: batch1.txt===
+
+
+ARGS: {'w': 0.7200497515516444, 'a1': 2.02, 'a2': 2.02, 'a3': 0.0, 'population_size': 20, 'time_steps': 1000, 'search_range': 10, 'constrainer': <function run_script.<locals>.<lambda> at 0x7f7b523655e0>}
+Saved Figure as "[1]full_data_plot.png"
+Saved Figure as "[2]train_data_plot.png"
+Saved Figure as "[3]test_data_plot.png"
+
+
+===NEW BATCH: batch1.txt===
+
+
+ARGS: {'w': 0.7200497515516444, 'a1': 2.02, 'a2': 2.02, 'a3': 0.0, 'population_size': 20, 'time_steps': 1000, 'search_range': 10, 'constrainer': <function run_script.<locals>.<lambda> at 0x7fa0a04a5670>}
+PSO 1 Training for 1000 Epochs with Population 20
