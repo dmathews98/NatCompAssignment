@@ -60,8 +60,10 @@ def plot_data(data, labels, nn=None, gridsize=30, verbose=True, plotname=None):
     if nn is not None:
         a = np.linspace(-5, 5, gridsize)
         def contour_helper(pos):
+            to_return = nn.predict(pos.reshape(1, 2))
             # **2 is for quadratic features we engineered
-            to_return = nn.predict(np.hstack([pos.reshape(1, 2), pos.reshape(1, 2)**2]))
+            # UNCOMMENT THIS INSTEAD TO GET NONLINEAR FEATURES
+            #to_return = nn.predict(np.hstack([pos.reshape(1, 2), pos.reshape(1, 2)**2]))
             return DataParameters.L1 if to_return[0, 0] > (DataParameters.L1+DataParameters.L2)/2 else DataParameters.L2
         zz = np.zeros((gridsize, gridsize), dtype=np.int8)
         for x in range(gridsize):
