@@ -109,13 +109,7 @@ def prepare_neural_net(q, traindata, trainlab, datarr, labarr):
                 ),
                 tf.keras.layers.ReLU(dtype=np.float64),
                 tf.keras.layers.Dense(
-                    units=5,
-                    dtype=np.float64,
-                    kernel_regularizer=tf.keras.regularizers.L2(l2=DataParameters.REGULARIZATION)
-                ),
-                tf.keras.layers.ReLU(dtype=np.float64),
-                tf.keras.layers.Dense(
-                    units=4,
+                    units=6,
                     dtype=np.float64,
                     kernel_regularizer=tf.keras.regularizers.L2(l2=DataParameters.REGULARIZATION)
                 ),
@@ -153,8 +147,8 @@ def prepare_neural_net(q, traindata, trainlab, datarr, labarr):
     def fitness(pos):
         nn.set_weights(pos/DataParameters.SCALE)
         mae = nn.evaluate(
-            x=traindata,
-            y=trainlab,
+            x=datarr,#traindata,
+            y=labarr,#trainlab,
             verbose=0
         )
         return mae
