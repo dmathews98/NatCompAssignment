@@ -1,0 +1,13 @@
+Saved Figure as "[1]full_data_plot.png"
+Saved Figure as "[2]train_data_plot.png"
+Saved Figure as "[3]test_data_plot.png"
+
+
+===NEW BATCH: batchfile.txt===
+
+
+ARGS: {'population_size': 12, 'time_steps': 1, 'mutation_rate': 0.5, 'crossover_rate': 0.1, 'flip_chance': 0.5, 'whither_rate': 0.1, 'growth_rate': 0.1, 'train_epochs': 100, 'test_epochs': 1000, 'batch': 5}
+GP 1 Training for 1 Generations with Population 12
+GP Best: 0.024130240082740784
+ With key: ReLU[10]: (Sigmoid[5]: (Input,Input),Input)
+Saved Figure as "[4]plot_of_gp_accuracies_over_time.png"

@@ -1,0 +1,117 @@
+2020-11-11 12:08:41.124281: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN)to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2020-11-11 12:08:41.130954: I tensorflow/core/platform/profile_utils/cpu_utils.cc:104] CPU Frequency: 2345480000 Hz
+2020-11-11 12:08:41.132837: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x55c72107ad00 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-11-11 12:08:41.132853: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+full data
+[SAVED TO all_outputs.txt] Saved Figure as "[1]full_data_plot.png"
+train data
+[SAVED TO all_outputs.txt] Saved Figure as "[2]train_data_plot.png"
+test data
+[SAVED TO all_outputs.txt] Saved Figure as "[3]test_data_plot.png"
+[SAVED TO all_outputs.txt] 
+
+===NEW BATCH: batchfile.txt===
+
+
+[SAVED TO all_outputs.txt] ARGS:  {'population_size': 12, 'time_steps': 1, 'mutation_rate': 0.5, 'crossover_rate': 0.1, 'flip_chance': 0.5, 'whither_rate': 0.1, 'growth_rate': 0.1, 'train_epochs': 100, 'test_epochs': 1000, 'batch': 5}
+[SAVED TO all_outputs.txt] GP 1 Training for 1 Generations with Population 12
+1/1: Best Fitness 0.47358256578445435
+Model: "functional_49"
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_25 (InputLayer)           [(None, 500, 4)]     0                                            
+__________________________________________________________________________________________________
+dense_110 (Dense)               (None, 500, 4)       20          input_25[0][0]                   
+__________________________________________________________________________________________________
+dense_111 (Dense)               (None, 500, 4)       20          input_25[0][0]                   
+__________________________________________________________________________________________________
+concatenate_32 (Concatenate)    (None, 500, 8)       0           dense_110[0][0]                  
+                                                                 dense_111[0][0]                  
+__________________________________________________________________________________________________
+dense_112 (Dense)               (None, 500, 5)       45          concatenate_32[0][0]             
+__________________________________________________________________________________________________
+activation_8 (Activation)       (None, 500, 5)       0           dense_112[0][0]                  
+__________________________________________________________________________________________________
+dense_113 (Dense)               (None, 500, 4)       20          input_25[0][0]                   
+__________________________________________________________________________________________________
+concatenate_31 (Concatenate)    (None, 500, 9)       0           activation_8[0][0]               
+                                                                 dense_113[0][0]                  
+__________________________________________________________________________________________________
+dense_114 (Dense)               (None, 500, 10)      100         concatenate_31[0][0]             
+__________________________________________________________________________________________________
+re_lu_23 (ReLU)                 (None, 500, 10)      0           dense_114[0][0]                  
+__________________________________________________________________________________________________
+dense_115 (Dense)               (None, 500, 1)       11          re_lu_23[0][0]                   
+==================================================================================================
+Total params: 216
+Trainable params: 216
+Non-trainable params: 0
+__________________________________________________________________________________________________
+1/8 [==>...........................] - ETA: 0s - loss: 0.02858/8 [==============================] - 0s 344us/step - loss: 0.0241
+[SAVED TO all_outputs.txt] GP Best:  0.024130240082740784 
+ With key: ReLU[10]: (Sigmoid[5]: (Input,Input),Input)
+[SAVED TO all_outputs.txt] Saved Figure as "[4]plot_of_gp_accuracies_over_time.png"
+Traceback (most recent call last):
+  File "main.py", line 68, in <module>
+    run_script(sys.argv[1])
+  File "main.py", line 63, in run_script
+    gp(**kwargs)
+  File "/home/s1610357/NatCompAssignment/Assignment-2/GA-GP/models.py", line 180, in gp
+    plot_data(testdata, testlab, nn, verbose=False, plotname=f'gp{gpcount}.png')
+  File "/home/s1610357/NatCompAssignment/Assignment-2/GA-GP/make_data.py", line 72, in plot_data
+    zz[x, gridsize - y - 1] = (contour_helper(np.array([a[x], a[y]])))
+  File "/home/s1610357/NatCompAssignment/Assignment-2/GA-GP/make_data.py", line 63, in contour_helper
+    to_return = nn.predict(pos.reshape(1, 2))
+  File "/home/s1610357/.conda/envs/NatCompEnv/lib/python3.8/site-packages/tensorflow/python/keras/engine/training.py", line 130, in _method_wrapper
+    return method(self, *args, **kwargs)
+  File "/home/s1610357/.conda/envs/NatCompEnv/lib/python3.8/site-packages/tensorflow/python/keras/engine/training.py", line 1599, in predict
+    tmp_batch_outputs = predict_function(iterator)
+  File "/home/s1610357/.conda/envs/NatCompEnv/lib/python3.8/site-packages/tensorflow/python/eager/def_function.py", line 780, in __call__
+    result = self._call(*args, **kwds)
+  File "/home/s1610357/.conda/envs/NatCompEnv/lib/python3.8/site-packages/tensorflow/python/eager/def_function.py", line 823, in _call
+    self._initialize(args, kwds, add_initializers_to=initializers)
+  File "/home/s1610357/.conda/envs/NatCompEnv/lib/python3.8/site-packages/tensorflow/python/eager/def_function.py", line 696, in _initialize
+    self._stateful_fn._get_concrete_function_internal_garbage_collected(  # pylint: disable=protected-access
+  File "/home/s1610357/.conda/envs/NatCompEnv/lib/python3.8/site-packages/tensorflow/python/eager/function.py", line 2855, in _get_concrete_function_internal_garbage_collected
+    graph_function, _, _ = self._maybe_define_function(args, kwargs)
+  File "/home/s1610357/.conda/envs/NatCompEnv/lib/python3.8/site-packages/tensorflow/python/eager/function.py", line 3213, in _maybe_define_function
+    graph_function = self._create_graph_function(args, kwargs)
+  File "/home/s1610357/.conda/envs/NatCompEnv/lib/python3.8/site-packages/tensorflow/python/eager/function.py", line 3065, in _create_graph_function
+    func_graph_module.func_graph_from_py_func(
+  File "/home/s1610357/.conda/envs/NatCompEnv/lib/python3.8/site-packages/tensorflow/python/framework/func_graph.py", line 986, in func_graph_from_py_func
+    func_outputs = python_func(*func_args, **func_kwargs)
+  File "/home/s1610357/.conda/envs/NatCompEnv/lib/python3.8/site-packages/tensorflow/python/eager/def_function.py", line 600, in wrapped_fn
+    return weak_wrapped_fn().__wrapped__(*args, **kwds)
+  File "/home/s1610357/.conda/envs/NatCompEnv/lib/python3.8/site-packages/tensorflow/python/framework/func_graph.py", line 973, in wrapper
+    raise e.ag_error_metadata.to_exception(e)
+ValueError: in user code:
+
+    /home/s1610357/.conda/envs/NatCompEnv/lib/python3.8/site-packages/tensorflow/python/keras/engine/training.py:1462 predict_function  *
+        return step_function(self, iterator)
+    /home/s1610357/.conda/envs/NatCompEnv/lib/python3.8/site-packages/tensorflow/python/keras/engine/training.py:1452 step_function  **
+        outputs = model.distribute_strategy.run(run_step, args=(data,))
+    /home/s1610357/.conda/envs/NatCompEnv/lib/python3.8/site-packages/tensorflow/python/distribute/distribute_lib.py:1211 run
+        return self._extended.call_for_each_replica(fn, args=args, kwargs=kwargs)
+    /home/s1610357/.conda/envs/NatCompEnv/lib/python3.8/site-packages/tensorflow/python/distribute/distribute_lib.py:2585 call_for_each_replica
+        return self._call_for_each_replica(fn, args, kwargs)
+    /home/s1610357/.conda/envs/NatCompEnv/lib/python3.8/site-packages/tensorflow/python/distribute/distribute_lib.py:2945 _call_for_each_replica
+        return fn(*args, **kwargs)
+    /home/s1610357/.conda/envs/NatCompEnv/lib/python3.8/site-packages/tensorflow/python/keras/engine/training.py:1445 run_step  **
+        outputs = model.predict_step(data)
+    /home/s1610357/.conda/envs/NatCompEnv/lib/python3.8/site-packages/tensorflow/python/keras/engine/training.py:1418 predict_step
+        return self(x, training=False)
+    /home/s1610357/.conda/envs/NatCompEnv/lib/python3.8/site-packages/tensorflow/python/keras/engine/base_layer.py:985 __call__
+        outputs = call_fn(inputs, *args, **kwargs)
+    /home/s1610357/.conda/envs/NatCompEnv/lib/python3.8/site-packages/tensorflow/python/keras/engine/functional.py:385 call
+        return self._run_internal_graph(
+    /home/s1610357/.conda/envs/NatCompEnv/lib/python3.8/site-packages/tensorflow/python/keras/engine/functional.py:508 _run_internal_graph
+        outputs = node.layer(*args, **kwargs)
+    /home/s1610357/.conda/envs/NatCompEnv/lib/python3.8/site-packages/tensorflow/python/keras/engine/base_layer.py:975 __call__
+        input_spec.assert_input_compatibility(self.input_spec, inputs,
+    /home/s1610357/.conda/envs/NatCompEnv/lib/python3.8/site-packages/tensorflow/python/keras/engine/input_spec.py:212 assert_input_compatibility
+        raise ValueError(
+
+    ValueError: Input 0 of layer dense_110 is incompatible with the layer: expected axis -1 of input shape to have value 4 but received input with shape [None, 2]
+
