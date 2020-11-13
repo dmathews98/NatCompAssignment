@@ -8,7 +8,7 @@ class PSOTrainable():
     """
     def __init__(self, layerlist, datarr):
         self.model = tf.keras.Sequential(layerlist)
-        self.model.compile(loss='mean_squared_error')
+        self.model.compile(loss=DataParameters.LOSS, metrics='accuracy')
         self.model(datarr)
 
     def summary(self):
@@ -48,3 +48,6 @@ class PSOTrainable():
 
     def predict(self, *args, **kwargs):
         return self.model.predict(*args, **kwargs)
+
+# Set the DataParameters' pointer to this class so it can create the model
+DataParameters.PSOTrainable = PSOTrainable

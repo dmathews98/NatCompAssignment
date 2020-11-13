@@ -122,7 +122,7 @@ class PSO: # all the material that is relavant at swarm leveel
                     )
                 )
                                 
-                if new_position@new_position > 1.0e+18: # The search will be terminated if the distance 
+                if new_position@new_position > 1.0e+22: # The search will be terminated if the distance 
                                                         # of any particle from center is too large
                     print('Time:', t,'Best Pos:',self.best_swarm_pos,'Best Fit:',self.best_swarm_fitness)
                     raise SystemExit('Most likely divergent: Decrease parameter values')

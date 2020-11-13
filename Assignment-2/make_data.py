@@ -24,10 +24,10 @@ def generate_data_set(M, s, noise_scale):
         x1_set = gen_spiral(0).reshape((s//2, M))
         x_1_set = gen_spiral(math.pi).reshape((s//2, M))
 
-        # UNCOMMENT THIS TO GET NONLINEAR FEATURES
-        # Insert x^2 and y^2 features.
-        #x1_set = np.hstack([x1_set, x1_set**2])
-        #x_1_set = np.hstack([x_1_set, x_1_set**2])
+        # Insert x^2, y^2, sin(x), and sin(y) features.
+        if not DataParameters.USE_LINEAR_ONLY_MODEL:
+            x1_set = np.hstack([x1_set, x1_set**2, np.sin(x1_set)])
+            x_1_set = np.hstack([x_1_set, x_1_set**2, np.sin(x_1_set)])
 
     full_data = np.hstack([
         np.vstack([x1_set, x_1_set]),
@@ -60,20 +60,34 @@ def plot_data(data, labels, nn=None, gridsize=30, verbose=True, plotname=None):
     if nn is not None:
         a = np.linspace(-5, 5, gridsize)
         def contour_helper(pos):
-            to_return = nn.predict(pos.reshape(1, 2))
             # **2 is for quadratic features we engineered
-            # UNCOMMENT THIS INSTEAD TO GET NONLINEAR FEATURES
-            #to_return = nn.predict(np.hstack([pos.reshape(1, 2), pos.reshape(1, 2)**2]))
-            return DataParameters.L1 if to_return[0, 0] > (DataParameters.L1+DataParameters.L2)/2 else DataParameters.L2
+            to_return = nn.predict(np.hstack([pos.reshape(1, 2), pos.reshape(1, 2)**2, np.sin(pos.reshape(1, 2))]))
+            def discretizer(x):
+                return DataParameters.L1 if x > (DataParameters.L1+DataParameters.L2)/2 else DataParameters.L2
+            return discretizer(to_return[0, 0]) if DataParameters.MAKE_DISCRETE_PLOT else to_return[0, 0]
         zz = np.zeros((gridsize, gridsize), dtype=np.int8)
         for x in range(gridsize):
             if verbose: print("Drawing %d%% complete!" % int(100 * x / gridsize))
             for y in range(gridsize):
-                zz[x, gridsize - y - 1] = (contour_helper(np.array([a[x], a[y]])))
+                zz[y, x] = (contour_helper(np.array([a[x], a[y]])))
         plt.contourf(a, a, zz)
-
-    plt.plot(rplot[:, 0], rplot[:, 1], 'r.')
-    plt.plot(bplot[:, 0], bplot[:, 1], 'b.')
+        rplot_pred = nn.predict(np.hstack([rplot, rplot**2, np.sin(rplot)]))
+        rplot_correct = np.array([x for x, y in zip(rplot, rplot_pred) if y > (DataParameters.L1+DataParameters.L2)/2])
+        rplot_incorrect = np.array([x for x, y in zip(rplot, rplot_pred) if y <= (DataParameters.L1+DataParameters.L2)/2])
+        bplot_pred = nn.predict(np.hstack([bplot, bplot**2, np.sin(bplot)]))
+        bplot_correct = np.array([x for x, y in zip(bplot, bplot_pred) if y <= (DataParameters.L1+DataParameters.L2)/2])
+        bplot_incorrect = np.array([x for x, y in zip(bplot, bplot_pred) if y > (DataParameters.L1+DataParameters.L2)/2])
+        if rplot_correct.shape[0] > 0:
+            plt.plot(rplot_correct[:, 0], rplot_correct[:, 1], 'ro')
+        if bplot_correct.shape[0] > 0:
+            plt.plot(bplot_correct[:, 0], bplot_correct[:, 1], 'bo')
+        if rplot_incorrect.shape[0] > 0:
+            plt.plot(rplot_incorrect[:, 0], rplot_incorrect[:, 1], 'rx')
+        if bplot_incorrect.shape[0] > 0:
+            plt.plot(bplot_incorrect[:, 0], bplot_incorrect[:, 1], 'bx')
+    else:
+        plt.plot(rplot[:, 0], rplot[:, 1], 'r.')
+        plt.plot(bplot[:, 0], bplot[:, 1], 'b.')
 
     if plotname is None:
         showout(f'plot_{plotnum}.png')#plt.show()
@@ -92,6 +106,8 @@ def mapcap(x, bound=1):
     return np.array([cap(y, bound=bound) for y in x])
 
 def prepare_neural_net(q, traindata, trainlab, datarr, labarr):
+    # q is outdated parameter whuch was used in CW1
+    # just set it to 3.
     if q == 1:
         nn = PSOTrainable(
             [tf.keras.layers.Dense(units=1, dtype=np.float64)],
@@ -99,71 +115,31 @@ def prepare_neural_net(q, traindata, trainlab, datarr, labarr):
         )
     elif q == 3:
         # Here we make the model
-        # Note this is the model for linear inputs, use other one for nonlinear
-        nn = PSOTrainable(
-            [
-                tf.keras.layers.Dense(
-                    units=6,
-                    dtype=np.float64,
-                    kernel_regularizer=tf.keras.regularizers.L2(l2=DataParameters.REGULARIZATION)
-                ),
-                tf.keras.layers.ReLU(dtype=np.float64),
-                tf.keras.layers.Dense(
-                    units=6,
-                    dtype=np.float64,
-                    kernel_regularizer=tf.keras.regularizers.L2(l2=DataParameters.REGULARIZATION)
-                ),
-                tf.keras.layers.ReLU(dtype=np.float64),
-                tf.keras.layers.Dense(
-                    units=1,
-                    dtype=np.float64,
-                    kernel_regularizer=tf.keras.regularizers.L2(l2=DataParameters.REGULARIZATION)
-                ) # Output layer, don't forget this!!
-            ],
-            datarr
-        )
-        """
-        nn = PSOTrainable(
-            [
-                tf.keras.layers.Dense(
-                    units=8,
-                    dtype=np.float64,
-                    kernel_regularizer=tf.keras.regularizers.L2(l2=DataParameters.REGULARIZATION)
-                ),
-                tf.keras.layers.ReLU(dtype=np.float64), # ReLU necessary or it won't learn nonlinear stuff
-                tf.keras.layers.Dense(
-                    units=1,
-                    dtype=np.float64,
-                    kernel_regularizer=tf.keras.regularizers.L2(l2=DataParameters.REGULARIZATION)
-                ) # Output layer, don't forget this!!
-            ],
-            datarr
-        )
-        """
+        nn = DataParameters.MODEL_TO_USE(datarr)
     nn.summary()
 
     # Sanity check, will throw error if weight calculation fails:
-    nn.set_weights(np.array(list(range(nn.get_weight_count()))))
-    def fitness(pos):
+    #nn.set_weights(np.array(list(range(nn.get_weight_count()))))
+    def fitness_f(pos:typing.List[float]):
         nn.set_weights(pos/DataParameters.SCALE)
         mae = nn.evaluate(
-            x=datarr,#traindata,
-            y=labarr,#trainlab,
+            x=traindata,
+            y=trainlab,
             verbose=0
         )
-        return mae
-    def evaluate(pos):
+        return mae[0]
+    def evaluate_f(pos:typing.List[float]):
         nn.set_weights(pos/DataParameters.SCALE)
         mae = nn.evaluate(
             x=datarr,
             y=labarr,
             verbose=0
         )
-        return mae
-    return fitness, evaluate, nn.get_weight_count(), nn
+        return mae[0]
+    return fitness_f, evaluate_f, nn.get_weight_count(), nn
 
 np.random.seed(1721204)
-#noise_scale = 0#0.125
+noise_scale = 0#0.125
 
 datarr, labarr = generate_data_set(
     M=DataParameters.M,
@@ -184,3 +160,4 @@ plot_data(traindata, trainlab, plotname='train_data_plot.png')
 
 print('test data')
 plot_data(testdata, testlab, plotname='test_data_plot.png')
+

@@ -14,7 +14,7 @@ on other courses soon, so I don't have time to do this (sorry)
 class GPTree():
     activations = ['ReLU', 'Sigmoid', 'Swish', 'Linear']
 
-    def __init__(self, label: str, info: int=1, children: typing.List['GPTree']=[]):
+    def __init__(self, label: str, info: int=1, info2: int=0, children: typing.List['GPTree']=[]):
         """
         Info specifies how many nodes in a layer, for example
         It's just additional specification beyond the label
@@ -22,6 +22,7 @@ class GPTree():
         self.label = label
         self.children = children
         self.info = info
+        self.info2 = info2
         self.parent = None
         for child in children:
             child.parent = self
@@ -67,7 +68,10 @@ class GPTree():
         if np.random.uniform(0, 1) < flip_chance:
             to_mutate.label = np.random.choice(GPTree.activations)
         else:
-            to_mutate.info = np.random.randint(1, 11)
+            if np.random.uniform(0, 1) < 0.5:
+                to_mutate.info = np.random.randint(1, 11)
+            else:
+                to_mutate.info2 = np.random.randint(0, 4)
 
 
     def whither(self):
@@ -88,19 +92,22 @@ class GPTree():
         # Will grow
         to_grow.label = np.random.choice(GPTree.activations)
         to_grow.info = np.random.randint(1, 11)
+        to_grow.info2 = np.random.randint(0, 4)
         to_grow.children = [GPTree('Input'), GPTree('Input')]
 
     def copy(self) -> 'GPTree':
         return GPTree(
             self.label,
-            self.info,
+            info=self.info,
+            info2=self.info2,
             children = [x.copy() for x in self.children]
         )
 
     def __str__(self) -> 'str':
         if self.label == 'Input':
             return 'Input'
-        return f"{self.label}[{self.info}]: ({','.join(map(str, self.children))})"
+        return f"{self.label}[{self.info}, {DataParameters.INITIALIZER_STRING(self.info2)}]: ({','.join(map(str, self.children))})"
+        
 
 class GP():
     def __init__(
@@ -127,7 +134,8 @@ class GP():
         """
         to_return = GPTree(
             label='ReLU',
-            info=10,
+            info=1,
+            info2=0,
             children=[
                 GPTree('Input'),
                 GPTree('Input')
@@ -160,7 +168,13 @@ class GP():
             label = geno.label
             if label in GPTree.activations:
                 inputs = tf.keras.layers.Concatenate()(list(map(recurse, geno.children)))
-                layer = tf.keras.layers.Dense(geno.info)(inputs)
+                layer = tf.keras.layers.Dense(
+                    units=geno.info,
+                    kernel_regularizer=tf.keras.regularizers.L2(
+                        l2=DataParameters.REGULARIZATION
+                    ),
+                    kernel_initializer=DataParameters.DECODE_INITIALIZER(geno.info2)
+                )(inputs)
                 if label == 'ReLU':
                     activation = tf.keras.layers.ReLU(dtype=np.float64)(layer)
                 elif label == 'Sigmoid':
@@ -176,7 +190,7 @@ class GP():
                 assert False, f"'{label}' is not a valid layer in GP!"
 
         body = recurse(genotype)
-        out = tf.keras.layers.Dense(1)(body)
+        out = tf.keras.layers.Dense(units=1, activation=DataParameters.FINAL_ACTIVATION)(body)
         to_return = tf.keras.Model(inputs=datin, outputs=out)
         return to_return
 
@@ -184,13 +198,14 @@ class GP():
         if seed is not None:
             tf.random.set_seed(int(seed)) # So that we get consistent results
         nn = self.genotype_to_neural_net(self.best, traindata)
-        nn.compile(loss='mean_squared_error')
+        nn.compile(loss=DataParameters.LOSS, metrics='accuracy')
         nn.fit(
             x=traindata,
             y=trainlab,
             epochs=epochs,
             verbose=0,
-            batch_size=batch
+            batch_size=batch,
+            callbacks=DataParameters.EARLY_STOPPING()
         )
         return nn.evaluate(testdata, testlab)
 
@@ -199,13 +214,14 @@ class GP():
         def fitness_func(genotype, epochs=train_epochs):
             tf.random.set_seed(1721204) # So that we get consistent results
             nn = self.genotype_to_neural_net(genotype, traindata)
-            nn.compile(loss='mean_squared_error')
+            nn.compile(loss=DataParameters.LOSS, metrics='accuracy')
             nn.fit(
                 x=traindata,
                 y=trainlab,
                 epochs=epochs,
                 verbose=0,
-                batch_size=batch
+                batch_size=batch,
+                callbacks=[tf.keras.callbacks.EarlyStopping()]
             )
             return nn.evaluate(testdata, testlab, verbose=0)
         for i in tf.range(generations):
@@ -216,14 +232,14 @@ class GP():
 
         # Return the best performing network
         fitness_list = sorted([
-            (fitness_func(org, epochs=test_epochs), org) for org in self.population
+            (fitness_func(org, epochs=train_epochs)[0], org) for org in self.population
         ], key=lambda x: x[0])
         self.best = fitness_list[0][1]
-        return fitness_list[0], performances_over_time
+        return (fitness_func(self.best, epochs=test_epochs)[0], self.best), performances_over_time
 
     def run_loop(self, fitness_func):
         fitness_list = sorted([
-            (fitness_func(org), org) for org in self.population
+            (fitness_func(org)[0], org) for org in self.population
         ], key=lambda x: x[0])
         fits, orgs = list(zip(*fitness_list))
         fits = np.array(fits)
@@ -333,3 +349,4 @@ class GP():
 
         assert len(mutated) == self.pop_size, "Population Changed!"
         return mutated, fits[0]
+                

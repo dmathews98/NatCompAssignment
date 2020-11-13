@@ -1,12 +1,10 @@
 from models import *
 import sys
 
-def run_script(scriptfile):
-    printout(f"\n\n===NEW BATCH: {scriptfile}===\n\n")
-    f = open(scriptfile, "r")
-    script = f.read()
-
-    line_by_line = script.strip().split('\n')
+def run_script(script):
+    f = open(script, 'r')
+    line_by_line = f.read().strip().split('\n')
+    f.close()
     for line in line_by_line:
         data = line.split(';')
         alg = data[0]
@@ -30,9 +28,9 @@ def run_script(scriptfile):
             if alg == 'SGD':
                 sgd(**kwargs)
             elif alg == 'PSO':
+                printout(f"Raw kwargs: {kwargs}")
                 total_a = kwargs['total_a']
                 a1_percent = kwargs['a1_percent']
-                epsilon = kwargs['epsilon']
                 def get_w(a, c):
                     """
                     Calculates w given a if we skirt along the 'region of compexity'
@@ -45,7 +43,7 @@ def run_script(scriptfile):
                     of complexity (so negative c will enter the region more!)
                     """
                     return c -np.sqrt(4*a) + a + 1
-                inertia = get_w(total_a, epsilon)
+                inertia = get_w(total_a, kwargs['epsilon'])
 
                 pso(
                     w=inertia,
@@ -54,7 +52,7 @@ def run_script(scriptfile):
                     a3=kwargs['a3'],
                     population_size=kwargs['population_size'],
                     time_steps=kwargs['time_steps'],
-                    search_range=10,
+                    search_range=DataParameters.SCALE,
                     constrainer=lambda x: x
                 )
             elif alg == 'GA':

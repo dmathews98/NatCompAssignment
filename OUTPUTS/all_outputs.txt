@@ -82,3 +82,82 @@ GA 1 Training for 1 Generations with Population 12
 GA Best: 0.86211758852005
 Saved Figure as "[9]plot_of_ga_accuracies_over_time.png"
 Saved Figure as "[10]ga1.png"
+Saved Figure as "[1]full_data_plot.png"
+Saved Figure as "[2]train_data_plot.png"
+Saved Figure as "[3]test_data_plot.png"
+Saved Figure as "[1]full_data_plot.png"
+Saved Figure as "[2]train_data_plot.png"
+Saved Figure as "[3]test_data_plot.png"
+Saved Figure as "[1]full_data_plot.png"
+Saved Figure as "[2]train_data_plot.png"
+Saved Figure as "[3]test_data_plot.png"
+ARGS: {'population_size': 5, 'time_steps': 1000, 'averaging': 3}
+Saved Figure as "[1]full_data_plot.png"
+Saved Figure as "[2]train_data_plot.png"
+Saved Figure as "[3]test_data_plot.png"
+ARGS: {'population_size': 5, 'time_steps': 1000, 'averaging': 3}
+Saved Figure as "[1]full_data_plot.png"
+Saved Figure as "[2]train_data_plot.png"
+Saved Figure as "[3]test_data_plot.png"
+ARGS: {'population_size': 5, 'time_steps': 1000, 'averaging': 3}
+Saved Figure as "[1]full_data_plot.png"
+Saved Figure as "[2]train_data_plot.png"
+Saved Figure as "[3]test_data_plot.png"
+ARGS: {'population_size': 5, 'time_steps': 1000, 'averaging': 3}
+Gradient Descent 1 Training for 1000 Epochs with 5 per Batch
+Saved Figure as "[1]full_data_plot.png"
+Saved Figure as "[2]train_data_plot.png"
+Saved Figure as "[3]test_data_plot.png"
+ARGS: {'population_size': 5, 'time_steps': 1000, 'averaging': 3}
+Gradient Descent 1 Training for 1000 Epochs with 5 per Batch
+Gradient Descent Over!  Avg Score: 0.6308126921455065 Deviation: 0.3091749090278847 Best: 0.23577924072742462 Worst: 0.9919999837875366
+Saved Figure as "[4]sgd_gradient_descent1_pop5_time1000_avg3.png"
+Saved Figure as "[1]full_data_plot.png"
+Saved Figure as "[2]train_data_plot.png"
+Saved Figure as "[3]test_data_plot.png"
+ARGS: {'population_size': 5, 'time_steps': 1000, 'averaging': 3}
+Gradient Descent 1 Training for 1000 Epochs with 5 per Batch
+Gradient Descent Over!  Avg Score: 0.3568769494692485 Deviation: 0.0057916079919129605 Best: 0.3520876467227936 Worst: 0.3650258183479309
+Avg Accuracy: 0.9359999895095825 Deviation: 0.003265992942421363 Best: 0.9319999814033508 Worst: 0.9399999976158142
+Saved Figure as "[4]sgd_gradient_descent1_pop5_time1000_avg3.png"
+Saved Figure as "[1]full_data_plot.png"
+Saved Figure as "[2]train_data_plot.png"
+Saved Figure as "[3]test_data_plot.png"
+ARGS: {'population_size': 5, 'time_steps': 1000, 'averaging': 3}
+Gradient Descent 1 Training for 1000 Epochs with 5 per Batch
+Gradient Descent Over!  Avg Score: 0.32880641023317975 Deviation: 0.019039732340120095 Best: 0.3126735985279083 Worst: 0.35554274916648865
+Avg Accuracy: 0.9706666668256124 Deviation: 0.010498698441526465 Best: 0.9559999704360962 Worst: 0.9800000190734863
+Saved Figure as "[4]sgd_gradient_descent1_pop5_time1000_avg3.png"
+Saved Figure as "[1]full_data_plot.png"
+Saved Figure as "[2]train_data_plot.png"
+Saved Figure as "[3]test_data_plot.png"
+ARGS: {'population_size': 5, 'time_steps': 2, 'averaging': 2}
+Gradient Descent 1 Training for 2 Epochs with 5 per Batch
+Gradient Descent Over!  Avg Score: 0.8756482601165771 Deviation: 0.03001701831817627 Best: 0.8456312417984009 Worst: 0.9056652784347534
+Avg Accuracy: 0.5419999957084656 Deviation: 0.018000006675720215 Best: 0.5239999890327454 Worst: 0.5600000023841858
+Saved Figure as "[4]sgd_gradient_descent1_pop5_time2_avg2.png"
+Saved Figure as "[1]full_data_plot.png"
+Saved Figure as "[2]train_data_plot.png"
+Saved Figure as "[3]test_data_plot.png"
+ARGS: {'population_size': 5, 'time_steps': 2, 'averaging': 2}
+Gradient Descent 1 Training for 2 Epochs with 5 per Batch
+Gradient Descent Over!  Avg Score: 1.1841157972812653 Deviation: 0.22250613570213318 Best: 0.9616096615791321 Worst: 1.4066219329833984
+Avg Accuracy: 0.5719999969005585 Deviation: 0.03999999165534973 Best: 0.5320000052452087 Worst: 0.6119999885559082
+Saved Figure as "[4]sgd_gradient_descent1_pop5_time2_avg2.png"
+Saved Figure as "[5]sgd_test_result{sgdcount}.png"
+Raw kwargs: {'total_a': 3.4, 'a1_percent': 0.5, 'epsilon': -0.21, 'population_size': 30, 'time_steps': 2, 'a3': 0.0}
+ARGS: {'w': 0.5021822170828449, 'a1': 1.7, 'a2': 1.7, 'a3': 0.0, 'population_size': 30, 'time_steps': 2, 'search_range': 1000, 'constrainer': <function run_script.<locals>.<lambda> at 0x84648dd90>}
+PSO 1 Training for 2 Epochs with Population 30
+PSO Training Over!  Score: [0.7459970712661743, 0.5040000081062317]
+Saved Figure as "[6]pso1.png"
+ARGS: {'population_size': 24, 'time_steps': 2, 'mutation_rate': 0.1, 'crossover_rate': 0.5, 'train_epochs': 100, 'test_epochs': 100, 'batch': 5}
+GA 1 Training for 2 Generations with Population 24
+GA Best (with genotype 0 111 Normal,1 011 HeNormal,1 100 HeNormal,0 101 Normal,1 011 HeNormal): [0.39863210916519165, 0.9160000085830688]
+Saved Figure as "[7]plot_of_ga_accuracies_over_time.png"
+Saved Figure as "[8]ga1.png"
+ARGS: {'population_size': 30, 'time_steps': 2, 'mutation_rate': 0.5, 'crossover_rate': 0.1, 'flip_chance': 0.5, 'whither_rate': 0.1, 'growth_rate': 0.1, 'train_epochs': 100, 'test_epochs': 1000, 'batch': 5}
+GP 1 Training for 2 Generations with Population 30
+GP Best (binary_crossentropy, accuracy): [0.604006826877594, 0.6200000047683716]
+ With key: ReLU[1, HeNormal]: (Swish[9, Uniform]: (Input,ReLU[7, Zeroes]: (Input,Input)),Input)
+Saved Figure as "[9]plot_of_gp_accuracies_over_time.png"
+Saved Figure as "[10]gp1.png"
