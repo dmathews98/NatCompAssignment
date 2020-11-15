@@ -15,18 +15,12 @@ class GA():
         """
 
         # Choose whether to do a random start, or start with a single neuron
-        main_bits = bin(np.random.randint(0, 2**DataParameters.GA_GENO_SIZE))[2:]
-        #org_size = DataParameters.GA_DUPLI_SIZE + DataParameters.GA_LAYER_SIZE
-        #bound = DataParameters.GA_GENO_SIZE // org_size
-        #main_bits = (
-        #    (bound-1) * ((DataParameters.GA_DUPLI_SIZE-1)*'0' + '1' + DataParameters.GA_LAYER_SIZE*'0')
-        #    + (org_size) * '1'
-        #)
+        main_bits = bin(np.random.randint(0, 2**DataParameters.GA_GENO_SIZE()))[2:]
 
         # Might have cut off leading zeroes:
-        leading_zeroes = ''.join((DataParameters.GA_GENO_SIZE-len(main_bits)) * ['0'])
+        leading_zeroes = ''.join((DataParameters.GA_GENO_SIZE()-len(main_bits)) * ['0'])
         to_return = leading_zeroes + main_bits
-        assert len(to_return) == DataParameters.GA_GENO_SIZE, "Something went wrong in GA random generation"
+        assert len(to_return) == DataParameters.GA_GENO_SIZE(), "Something went wrong in GA random generation"
         return to_return
 
     def genotype_to_phenotype(self, genotype):
@@ -42,15 +36,21 @@ class GA():
         (spaces added for readability but are not actually present)
         """
         def splitit(s):
-            org_size = DataParameters.GA_DUPLI_SIZE + DataParameters.GA_LAYER_SIZE
-            bound = DataParameters.GA_GENO_SIZE // org_size
+            lay_size = DataParameters.GA_BITS_PER_LAYER()
+            bound = DataParameters.GA_LAYER_AMOUNT
             for i in range(0, bound):
-                to_yield = s[org_size * i : org_size * (i + 1)]
-                yield (
+                to_yield = s[lay_size * i : lay_size * (i + 1)]
+                yield ((
                     int(to_yield[0:DataParameters.GA_DUPLI_SIZE], 2),
-                    int(to_yield[DataParameters.GA_DUPLI_SIZE:org_size], 2) + 1
-                )
-        return sum( (tup[0] * [tup[1]] for tup in splitit(genotype)), [])
+                    int(to_yield[
+                        DataParameters.GA_DUPLI_SIZE:-DataParameters.GA_INITIALIZER_SIZE
+                    ], 2) + 1
+                ), int(to_yield[-DataParameters.GA_INITIALIZER_SIZE:], 2))
+        splits = list(splitit(genotype))
+        return zip(
+            sum( (tup[0] * [tup[1]] for tup, initializer in splits), []),
+            [DataParameters.DECODE_INITIALIZER(initializer) for tup, initializer in splits]
+        )
 
     def phenotype_to_neural_net(self, phenotype, datarr):
         nn = PSOTrainable(
@@ -61,10 +61,11 @@ class GA():
                         dtype=np.float64,
                         kernel_regularizer=tf.keras.regularizers.L2(
                             l2=DataParameters.REGULARIZATION
-                        )
+                        ),
+                        kernel_initializer=initializer
                     ),
                     tf.keras.layers.ReLU(dtype=np.float64)
-                ] for layer_size in phenotype),
+                ] for layer_size, initializer in phenotype),
                 []
             ) + [
                 tf.keras.layers.Dense(
@@ -72,7 +73,9 @@ class GA():
                     dtype=np.float64,
                     kernel_regularizer=tf.keras.regularizers.L2(
                         l2=DataParameters.REGULARIZATION
-                    )
+                    ),
+                    activation=DataParameters.FINAL_ACTIVATION,
+                    kernel_initializer=tf.keras.initializers.HeNormal()
                 )
             ], # Output layer, don't forget this!!,
             datarr
@@ -109,7 +112,8 @@ class GA():
                 y=trainlab,
                 epochs=epochs,
                 verbose=0,
-                batch_size=batch
+                batch_size=batch,
+                callbacks=DataParameters.EARLY_STOPPING()
             )
             return nn.evaluate(testdata, testlab, verbose=0)
         for i in tf.range(generations):
@@ -120,14 +124,14 @@ class GA():
 
         # Return the best performing network
         fitness_list = sorted([
-            (fitness_func(org, epochs=test_epochs), org) for org in self.population
+            (fitness_func(org, epochs=train_epochs)[0], org) for org in self.population
         ], key=lambda x: x[0])
         self.best = fitness_list[0][1]
-        return fitness_list[0], performances_over_time
+        return (fitness_func(self.best, epochs=test_epochs)[0], self.best), performances_over_time
 
     def run_loop(self, fitness_func):
         fitness_list = sorted([
-            (fitness_func(org), org) for org in self.population
+            (fitness_func(org)[0], org) for org in self.population
         ], key=lambda x: x[0])
         fits, orgs = list(zip(*fitness_list))
         fits = np.array(fits)
@@ -197,8 +201,8 @@ class GA():
                 #b_out = b[:crossover_point] + a[crossover_point:]
 
                 # Layer specification crossover
-                total_size = DataParameters.GA_DUPLI_SIZE + DataParameters.GA_LAYER_SIZE
-                cp = np.random.randint(1, DataParameters.GA_GENO_SIZE // total_size)
+                total_size = DataParameters.GA_BITS_PER_LAYER()
+                cp = np.random.randint(1, DataParameters.GA_GENO_SIZE() // total_size)
                 a_out = a[:cp] + b[cp:cp+total_size] + a[cp+total_size:]
                 b_out = b[:cp] + a[cp:cp+total_size] + b[cp+total_size:]
             else:

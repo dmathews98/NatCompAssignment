@@ -1,2 +1,13 @@
-GP; population_size:I12, time_steps:I1, mutation_rate:F0.5, crossover_rate:F0.1, flip_chance:F0.5, whither_rate:F0.1, growth_rate:F0.1, train_epochs:I100, test_epochs:I1000, batch:I5
-GA; population_size:I12, time_steps:I1, mutation_rate:F0.1, crossover_rate:F0.5, train_epochs:I1, test_epochs:I10, batch:I5
+GA; population_size:I20, time_steps:I50, mutation_rate:F0.1, crossover_rate:F0.5, train_epochs:I100, test_epochs:I500, batch:I10
+GA; population_size:I20, time_steps:I50, mutation_rate:F0.01, crossover_rate:F0.5, train_epochs:I100, test_epochs:I500, batch:I10
+GA; population_size:I20, time_steps:I50, mutation_rate:F0.8, crossover_rate:F0.5, train_epochs:I100, test_epochs:I500, batch:I10
+GA; population_size:I20, time_steps:I50, mutation_rate:F0.1, crossover_rate:F0.1, train_epochs:I100, test_epochs:I500, batch:I10
+GA; population_size:I20, time_steps:I50, mutation_rate:F0.1, crossover_rate:F0.8, train_epochs:I100, test_epochs:I500, batch:I10
+GP; population_size:I20, time_steps:I50, mutation_rate:F0.5, crossover_rate:F0.1, flip_chance:F0.5, whither_rate:F0.1, growth_rate:F0.1, train_epochs:I100, test_epochs:I500, batch:I10
+GP; population_size:I20, time_steps:I50, mutation_rate:F0.8, crossover_rate:F0.1, flip_chance:F0.5, whither_rate:F0.1, growth_rate:F0.1, train_epochs:I100, test_epochs:I500, batch:I10
+GP; population_size:I20, time_steps:I50, mutation_rate:F0.1, crossover_rate:F0.1, flip_chance:F0.5, whither_rate:F0.1, growth_rate:F0.1, train_epochs:I100, test_epochs:I500, batch:I10
+GP; population_size:I20, time_steps:I50, mutation_rate:F0.5, crossover_rate:F0.8, flip_chance:F0.5, whither_rate:F0.1, growth_rate:F0.1, train_epochs:I100, test_epochs:I500, batch:I10
+GP; population_size:I20, time_steps:I50, mutation_rate:F0.5, crossover_rate:F0.01, flip_chance:F0.5, whither_rate:F0.1, growth_rate:F0.1, train_epochs:I100, test_epochs:I500, batch:I10
+GP; population_size:I20, time_steps:I50, mutation_rate:F0.5, crossover_rate:F0.1, flip_chance:F0.5, whither_rate:F0.8, growth_rate:F0.1, train_epochs:I100, test_epochs:I500, batch:I10
+GP; population_size:I20, time_steps:I50, mutation_rate:F0.5, crossover_rate:F0.1, flip_chance:F0.5, whither_rate:F0.01, growth_rate:F0.1, train_epochs:I100, test_epochs:I500, batch:I10
+GP; population_size:I20, time_steps:I50, mutation_rate:F0.5, crossover_rate:F0.1, flip_chance:F0.5, whither_rate:F0.1, growth_rate:F0.01, train_epochs:I100, test_epochs:I500, batch:I10

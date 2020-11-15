@@ -24,10 +24,10 @@ def generate_data_set(M, s, noise_scale):
         x1_set = gen_spiral(0).reshape((s//2, M))
         x_1_set = gen_spiral(math.pi).reshape((s//2, M))
 
-        # Insert x^2, y^2, sin(x), and sin(y) features.
+        # Insert x^2, y^2 features.
         if not DataParameters.USE_LINEAR_ONLY_MODEL:
-            x1_set = np.hstack([x1_set, x1_set**2, np.sin(x1_set)])
-            x_1_set = np.hstack([x_1_set, x_1_set**2, np.sin(x_1_set)])
+            x1_set = np.hstack([x1_set, x1_set**2])
+            x_1_set = np.hstack([x_1_set, x_1_set**2])
 
     full_data = np.hstack([
         np.vstack([x1_set, x_1_set]),
@@ -64,7 +64,7 @@ def plot_data(data, labels, nn=None, gridsize=30, verbose=True, plotname=None):
             if DataParameters.USE_LINEAR_ONLY_MODEL:
                 to_return = nn.predict(pos.reshape(1, 2))
             else:
-                to_return = nn.predict(np.hstack([pos.reshape(1, 2), pos.reshape(1, 2)**2, np.sin(pos.reshape(1, 2))]))
+                to_return = nn.predict(np.hstack([pos.reshape(1, 2), pos.reshape(1, 2)**2]))
             def discretizer(x):
                 return DataParameters.L1 if x > (DataParameters.L1+DataParameters.L2)/2 else DataParameters.L2
             return discretizer(to_return[0, 0]) if DataParameters.MAKE_DISCRETE_PLOT else to_return[0, 0]
@@ -78,14 +78,14 @@ def plot_data(data, labels, nn=None, gridsize=30, verbose=True, plotname=None):
         if DataParameters.USE_LINEAR_ONLY_MODEL:
             rplot_pred = nn.predict(rplot)
         else:
-            rplot_pred = nn.predict(np.hstack([rplot, rplot**2, np.sin(rplot)]))
+            rplot_pred = nn.predict(np.hstack([rplot, rplot**2]))
         rplot_correct = np.array([x for x, y in zip(rplot, rplot_pred) if y > (DataParameters.L1+DataParameters.L2)/2])
         rplot_incorrect = np.array([x for x, y in zip(rplot, rplot_pred) if y <= (DataParameters.L1+DataParameters.L2)/2])
 
         if DataParameters.USE_LINEAR_ONLY_MODEL:
             bplot_pred = nn.predict(bplot)
         else:
-            bplot_pred = nn.predict(np.hstack([bplot, bplot**2, np.sin(bplot)]))
+            bplot_pred = nn.predict(np.hstack([bplot, bplot**2]))
         bplot_correct = np.array([x for x, y in zip(bplot, bplot_pred) if y <= (DataParameters.L1+DataParameters.L2)/2])
         bplot_incorrect = np.array([x for x, y in zip(bplot, bplot_pred) if y > (DataParameters.L1+DataParameters.L2)/2])
         if rplot_correct.shape[0] > 0:
@@ -162,7 +162,7 @@ def make_data():
         noise_scale=DataParameters.NOISE
     )
     print('full data')
-    plot_data(datarr, labarr, plotname='full_data_plot.png')
+    plot_data(datarr, labarr, plotname='full_data_plot.pdf')
 
     split_pos = int(0.5 * datarr.shape[0])
     traindata = datarr[:split_pos, :]
@@ -171,9 +171,9 @@ def make_data():
     testlab = labarr[split_pos:]
 
     print('train data')
-    plot_data(traindata, trainlab, plotname='train_data_plot.png')
+    plot_data(traindata, trainlab, plotname='train_data_plot.pdf')
 
     print('test data')
-    plot_data(testdata, testlab, plotname='test_data_plot.png')
+    plot_data(testdata, testlab, plotname='test_data_plot.pdf')
 
 make_data()

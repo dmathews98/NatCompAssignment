@@ -49,8 +49,8 @@ def sgd(**kwargs):
     printout(f"Gradient Descent Over!  Avg Score: {scores[:, 0].mean()} Deviation: {scores[:, 0].std()} Best: {scores[:, 0].min()} Worst: {scores[:, 0].max()}")
     printout(f"Avg Accuracy: {scores[:, 1].mean()} Deviation: {scores[:, 1].std()} Best: {scores[:, 1].min()} Worst: {scores[:, 1].max()}")
     plt.plot(scores)
-    showout(f'sgd_gradient_descent{sgdcount}_pop{kwargs["population_size"]}_time{kwargs["time_steps"]}_avg{kwargs["averaging"]}.png') #plt.show()
-    make_data.plot_data(make_data.testdata, make_data.testlab, best_net, verbose=False, plotname=f"sgd_test_result{sgdcount}.png")
+    showout(f'sgd_gradient_descent{sgdcount}_pop{kwargs["population_size"]}_time{kwargs["time_steps"]}_avg{kwargs["averaging"]}.pdf') #plt.show()
+    make_data.plot_data(make_data.testdata, make_data.testlab, best_net, verbose=False, plotname=f"sgd_test_result{sgdcount}.pdf")
 
 
 psocount = 0
@@ -81,7 +81,7 @@ def pso(**kwargs):
     #print(nn.evaluate(make_data.testdata, make_data.testlab))
     printout(f"PSO Training Over!  Score: {nn.evaluate(make_data.testdata, make_data.testlab)}")
     
-    make_data.plot_data(make_data.testdata, make_data.testlab, nn, verbose=False, plotname=f'pso{psocount}.png')
+    make_data.plot_data(make_data.testdata, make_data.testlab, nn, verbose=False, plotname=f'pso{psocount}.pdf')
 
 gacount = 0
 def ga(**kwargs):
@@ -138,9 +138,9 @@ def ga(**kwargs):
     #print("Plot of (Training) Accuracies over Time")
     plt.plot(np.array(over_time))
     #plt.show()
-    showout('plot_of_ga_accuracies_over_time.png')
+    showout('plot_of_ga_accuracies_over_time.pdf')
     
-    make_data.plot_data(make_data.testdata, make_data.testlab, nn, verbose=False, plotname=f'ga{gacount}.png')
+    make_data.plot_data(make_data.testdata, make_data.testlab, nn, verbose=False, plotname=f'ga{gacount}.pdf')
                 
 
 gpcount = 0
@@ -189,6 +189,6 @@ def gp(**kwargs):
         f"\n With key: {best[1]}"
     )
     plt.plot(np.array(over_time))
-    showout('plot_of_gp_accuracies_over_time.png')
+    showout('plot_of_gp_accuracies_over_time.pdf')
     
-    make_data.plot_data(make_data.testdata, make_data.testlab, nn, verbose=False, plotname=f'gp{gpcount}.png')
+    make_data.plot_data(make_data.testdata, make_data.testlab, nn, verbose=False, plotname=f'gp{gpcount}.pdf')
