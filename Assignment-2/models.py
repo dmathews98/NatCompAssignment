@@ -176,6 +176,7 @@ def gp(**kwargs):
         batch=kwargs['population_size'],
         generations=kwargs['time_steps']
     )
+    testgp.plot_statistics(0, f'depthhistory{gpcount}')
     #print(f"Best Model (Loss; {best[0]}): ")
     nn = testgp.genotype_to_neural_net(best[1], make_data.datarr)
     nn.summary()

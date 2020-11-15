@@ -95,6 +95,11 @@ class GPTree():
         to_grow.info2 = np.random.randint(0, 4)
         to_grow.children = [GPTree('Input'), GPTree('Input')]
 
+    def get_depth(self):
+        if self.label == 'Input':
+          return 0
+        return max([child.get_depth() for child in self.children]) + 1
+
     def copy(self) -> 'GPTree':
         return GPTree(
             self.label,
@@ -127,6 +132,7 @@ class GP():
         self.best = self.population[0]
         self.whither_rate = whither_rate
         self.growth_rate = growth_rate
+        self.depth_history = []
 
     def starting_organism(self):
         """
@@ -143,6 +149,27 @@ class GP():
         )
         to_return.grow()
         return to_return
+
+    def get_statistics(self):
+        depths = np.array([x.get_depth() for x in self.population])
+        return np.array([depths.mean(), depths.std(), depths.max(), depths.min()])
+
+    def track_depth_history(self):
+        self.depth_history.append(self.get_statistics())
+
+    def plot_statistics(self, which, filename):
+        # `which` is the index into the statistics array
+        to_plot = np.array(self.depth_history)[:, which]
+        xs = [x+1 for x in range(len(self.depth_history))]
+        plt.plot(xs, to_plot, color='blue')
+        A, B = np.polyfit(np.log(xs), to_plot, 1)
+        ys = A*np.log(xs) + B
+        plt.plot(xs, ys, color='orange')
+        #asymptote = ys[ys.shape[0]//3:].mean()
+        #plt.plot(xs, [asymptote for x in xs], color='green', linestyle='dashed')
+        plt.title(f"GP Depth History with Growth: {self.growth_rate}, Whither: {self.whither_rate}")
+        plt.gca().set_ylim(bottom=1) # set lower y limit to be 1
+        showout(filename)
     
     def genotype_to_neural_net(self, genotype: GPTree, datarr):
         """
@@ -227,6 +254,7 @@ class GP():
         for i in tf.range(generations):
             self.population, best_fitness = self.run_loop(fitness_func)
             performances_over_time.append(best_fitness)
+            self.track_depth_history()
             if verbose and (generations <= 20 or i%(generations//20) == 0 or i == generations - 1):
                 print(f"{i+1}/{generations}: Best Fitness {best_fitness}")
 
