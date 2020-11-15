@@ -50,7 +50,7 @@ def sgd(**kwargs):
     printout(f"Avg Accuracy: {scores[:, 1].mean()} Deviation: {scores[:, 1].std()} Best: {scores[:, 1].min()} Worst: {scores[:, 1].max()}")
     plt.plot(scores)
     showout(f'sgd_gradient_descent{sgdcount}_pop{kwargs["population_size"]}_time{kwargs["time_steps"]}_avg{kwargs["averaging"]}.png') #plt.show()
-    make_data.plot_data(make_data.testdata, make_data.testlab, best_net, verbose=False, plotname="sgd_test_result{sgdcount}.png")
+    make_data.plot_data(make_data.testdata, make_data.testlab, best_net, verbose=False, plotname=f"sgd_test_result{sgdcount}.png")
 
 
 psocount = 0

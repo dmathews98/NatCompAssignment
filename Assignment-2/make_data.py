@@ -73,7 +73,7 @@ def plot_data(data, labels, nn=None, gridsize=30, verbose=True, plotname=None):
             if verbose: print("Drawing %d%% complete!" % int(100 * x / gridsize))
             for y in range(gridsize):
                 zz[y, x] = (contour_helper(np.array([a[x], a[y]])))
-        plt.contourf(a, a, zz)
+        plt.contourf(a, a, zz, cmap=plt.cm.summer)
 
         if DataParameters.USE_LINEAR_ONLY_MODEL:
             rplot_pred = nn.predict(rplot)
