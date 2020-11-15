@@ -16,3 +16,8 @@ Saved Figure as "[7]sgd_test_result2.pdf"
 Raw kwargs: {'total_a': 3.4, 'a1_percent': 0.5, 'epsilon': -0.21, 'population_size': 30, 'time_steps': 1000, 'a3': 0.0}
 ARGS: {'w': 0.5021822170828449, 'a1': 1.7, 'a2': 1.7, 'a3': 0.0, 'population_size': 30, 'time_steps': 1000, 'search_range': 1000, 'constrainer': <function run_script.<locals>.<lambda> at 0x7fc810650310>}
 PSO 1 Training for 1000 Epochs with Population 30
+PSO Training Over!  Score: [0.5070058107376099, 0.8159999847412109]
+Saved Figure as "[8]pso1.pdf"
+Raw kwargs: {'total_a': 3.4, 'a1_percent': 0.5, 'epsilon': -0.21, 'population_size': 30, 'time_steps': 2000, 'a3': 0.0}
+ARGS: {'w': 0.5021822170828449, 'a1': 1.7, 'a2': 1.7, 'a3': 0.0, 'population_size': 30, 'time_steps': 2000, 'search_range': 1000, 'constrainer': <function run_script.<locals>.<lambda> at 0x7fc81031c160>}
+PSO 2 Training for 2000 Epochs with Population 30
