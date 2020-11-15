@@ -3,7 +3,7 @@ from nn import *
 from ga import *
 from pso import *
 from gp import *
-from make_data import *
+import make_data
 
 sgdcount = 0
 def sgd(**kwargs):
@@ -14,12 +14,12 @@ def sgd(**kwargs):
         kwargs
     )
 
-    fitness, evaluate_func, dimensions, nn = prepare_neural_net(
+    fitness, evaluate_func, dimensions, nn = make_data.prepare_neural_net(
         DataParameters.Q,
-        traindata,
-        trainlab,
-        datarr,
-        labarr
+        make_data.traindata,
+        make_data.trainlab,
+        make_data.datarr,
+        make_data.labarr
     )
 
     # This performance seems highly variable, usually appearing in the 0.8-0.9 range,
@@ -31,13 +31,13 @@ def sgd(**kwargs):
     for i in range(int(kwargs['averaging'])):
         #nn.set_weights(np.random.uniform(-1, 1, nn.get_weight_count()))
         nn.model.fit(
-            x=traindata,
-            y=trainlab,
+            x=make_data.traindata,
+            y=make_data.trainlab,
             epochs=kwargs['time_steps'],
             verbose=0,
             batch_size=kwargs['population_size']
         )
-        score = nn.evaluate(traindata, trainlab)#testdata, testlab)
+        score = nn.evaluate(make_data.traindata, make_data.trainlab)#testdata, testlab)
         scores.append(score)
         if best_net is None:
             best_net = nn
@@ -50,7 +50,7 @@ def sgd(**kwargs):
     printout(f"Avg Accuracy: {scores[:, 1].mean()} Deviation: {scores[:, 1].std()} Best: {scores[:, 1].min()} Worst: {scores[:, 1].max()}")
     plt.plot(scores)
     showout(f'sgd_gradient_descent{sgdcount}_pop{kwargs["population_size"]}_time{kwargs["time_steps"]}_avg{kwargs["averaging"]}.png') #plt.show()
-    plot_data(testdata, testlab, best_net, verbose=False, plotname="sgd_test_result{sgdcount}.png")
+    make_data.plot_data(make_data.testdata, make_data.testlab, best_net, verbose=False, plotname="sgd_test_result{sgdcount}.png")
 
 
 psocount = 0
@@ -62,12 +62,12 @@ def pso(**kwargs):
         kwargs
     )
 
-    fitness_func, evaluate_func, dimensions, nn = prepare_neural_net(
+    fitness_func, evaluate_func, dimensions, nn = make_data.prepare_neural_net(
         DataParameters.Q,
-        traindata,
-        trainlab,
-        traindata,#testdata,
-        trainlab#testlab
+        make_data.traindata,
+        make_data.trainlab,
+        make_data.traindata,#testdata,
+        make_data.trainlab#testlab
     )
     
     printout(f"PSO {psocount} Training for {kwargs['time_steps']} Epochs with Population {kwargs['population_size']}")
@@ -78,10 +78,10 @@ def pso(**kwargs):
         **kwargs
     ).run()
     nn.set_weights(best/DataParameters.SCALE)
-    #print(nn.evaluate(testdata, testlab))
-    printout(f"PSO Training Over!  Score: {nn.evaluate(testdata, testlab)}")
+    #print(nn.evaluate(make_data.testdata, make_data.testlab))
+    printout(f"PSO Training Over!  Score: {nn.evaluate(make_data.testdata, make_data.testlab)}")
     
-    plot_data(testdata, testlab, nn, verbose=False, plotname=f'pso{psocount}.png')
+    make_data.plot_data(make_data.testdata, make_data.testlab, nn, verbose=False, plotname=f'pso{psocount}.png')
 
 gacount = 0
 def ga(**kwargs):
@@ -99,20 +99,20 @@ def ga(**kwargs):
         crossover_rate=kwargs['crossover_rate']
     )
     best, over_time = testga.run(
-        traindata,
-        trainlab,
-        testdata,
-        testlab,
+        make_data.traindata,
+        make_data.trainlab,
+        make_data.testdata,
+        make_data.testlab,
         train_epochs=kwargs['train_epochs'],
         test_epochs=kwargs['test_epochs'],
         batch=kwargs['population_size'],
         generations=kwargs['time_steps']
     )
     #print(f"Best Model (Loss; {best[0]}): ")
-    nn = testga.genotype_to_neural_net(best[1], datarr)
+    nn = testga.genotype_to_neural_net(best[1], make_data.datarr)
     nn.model.fit(
-        x=traindata,
-        y=trainlab,
+        x=make_data.traindata,
+        y=make_data.trainlab,
         epochs=kwargs['test_epochs'],
         verbose=0,
         batch_size=kwargs['batch'],
@@ -132,7 +132,7 @@ def ga(**kwargs):
         return string
     printout(
         f"GA Best (with genotype {format_genotype(best[1])}): ",
-        nn.evaluate(testdata, testlab)
+        nn.evaluate(make_data.testdata, make_data.testlab)
     )
     #print("GA Training Over!")
     #print("Plot of (Training) Accuracies over Time")
@@ -140,7 +140,7 @@ def ga(**kwargs):
     #plt.show()
     showout('plot_of_ga_accuracies_over_time.png')
     
-    plot_data(testdata, testlab, nn, verbose=False, plotname=f'ga{gacount}.png')
+    make_data.plot_data(make_data.testdata, make_data.testlab, nn, verbose=False, plotname=f'ga{gacount}.png')
                 
 
 gpcount = 0
@@ -162,22 +162,22 @@ def gp(**kwargs):
         growth_rate=kwargs['growth_rate']
     )
     best, over_time = testgp.run(
-        traindata,
-        trainlab,
-        testdata,
-        testlab,
+        make_data.traindata,
+        make_data.trainlab,
+        make_data.testdata,
+        make_data.testlab,
         train_epochs=kwargs['train_epochs'],
         test_epochs=kwargs['test_epochs'],
         batch=kwargs['population_size'],
         generations=kwargs['time_steps']
     )
     #print(f"Best Model (Loss; {best[0]}): ")
-    nn = testgp.genotype_to_neural_net(best[1], datarr)
+    nn = testgp.genotype_to_neural_net(best[1], make_data.datarr)
     nn.summary()
     nn.compile(loss=DataParameters.LOSS, metrics='accuracy')
     nn.fit(
-        x=traindata,
-        y=trainlab,
+        x=make_data.traindata,
+        y=make_data.trainlab,
         epochs=kwargs['test_epochs'],
         verbose=0,
         batch_size=kwargs['batch'],
@@ -185,10 +185,10 @@ def gp(**kwargs):
     )
     printout(
         f"GP Best ({DataParameters.LOSS}, accuracy): ",
-        nn.evaluate(testdata, testlab),
+        nn.evaluate(make_data.testdata, make_data.testlab),
         f"\n With key: {best[1]}"
     )
     plt.plot(np.array(over_time))
     showout('plot_of_gp_accuracies_over_time.png')
     
-    plot_data(testdata, testlab, nn, verbose=False, plotname=f'gp{gpcount}.png')
+    make_data.plot_data(make_data.testdata, make_data.testlab, nn, verbose=False, plotname=f'gp{gpcount}.png')

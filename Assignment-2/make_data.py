@@ -61,7 +61,10 @@ def plot_data(data, labels, nn=None, gridsize=30, verbose=True, plotname=None):
         a = np.linspace(-5, 5, gridsize)
         def contour_helper(pos):
             # **2 is for quadratic features we engineered
-            to_return = nn.predict(np.hstack([pos.reshape(1, 2), pos.reshape(1, 2)**2, np.sin(pos.reshape(1, 2))]))
+            if DataParameters.USE_LINEAR_ONLY_MODEL:
+                to_return = nn.predict(pos.reshape(1, 2))
+            else:
+                to_return = nn.predict(np.hstack([pos.reshape(1, 2), pos.reshape(1, 2)**2, np.sin(pos.reshape(1, 2))]))
             def discretizer(x):
                 return DataParameters.L1 if x > (DataParameters.L1+DataParameters.L2)/2 else DataParameters.L2
             return discretizer(to_return[0, 0]) if DataParameters.MAKE_DISCRETE_PLOT else to_return[0, 0]
@@ -71,10 +74,18 @@ def plot_data(data, labels, nn=None, gridsize=30, verbose=True, plotname=None):
             for y in range(gridsize):
                 zz[y, x] = (contour_helper(np.array([a[x], a[y]])))
         plt.contourf(a, a, zz)
-        rplot_pred = nn.predict(np.hstack([rplot, rplot**2, np.sin(rplot)]))
+
+        if DataParameters.USE_LINEAR_ONLY_MODEL:
+            rplot_pred = nn.predict(rplot)
+        else:
+            rplot_pred = nn.predict(np.hstack([rplot, rplot**2, np.sin(rplot)]))
         rplot_correct = np.array([x for x, y in zip(rplot, rplot_pred) if y > (DataParameters.L1+DataParameters.L2)/2])
         rplot_incorrect = np.array([x for x, y in zip(rplot, rplot_pred) if y <= (DataParameters.L1+DataParameters.L2)/2])
-        bplot_pred = nn.predict(np.hstack([bplot, bplot**2, np.sin(bplot)]))
+
+        if DataParameters.USE_LINEAR_ONLY_MODEL:
+            bplot_pred = nn.predict(bplot)
+        else:
+            bplot_pred = nn.predict(np.hstack([bplot, bplot**2, np.sin(bplot)]))
         bplot_correct = np.array([x for x, y in zip(bplot, bplot_pred) if y <= (DataParameters.L1+DataParameters.L2)/2])
         bplot_incorrect = np.array([x for x, y in zip(bplot, bplot_pred) if y > (DataParameters.L1+DataParameters.L2)/2])
         if rplot_correct.shape[0] > 0:
@@ -138,26 +149,31 @@ def prepare_neural_net(q, traindata, trainlab, datarr, labarr):
         return mae[0]
     return fitness_f, evaluate_f, nn.get_weight_count(), nn
 
-np.random.seed(1721204)
-noise_scale = 0#0.125
 
-datarr, labarr = generate_data_set(
-    M=DataParameters.M,
-    s=DataParameters.s,
-    noise_scale=DataParameters.NOISE
-)
-print('full data')
-plot_data(datarr, labarr, plotname='full_data_plot.png')
+datarr, labarr, traindata, trainlab, testdata, testlab = None, None, None, None, None, None
 
-split_pos = int(0.5 * datarr.shape[0])
-traindata = datarr[:split_pos, :]
-trainlab = labarr[:split_pos]
-testdata = datarr[split_pos:, :]
-testlab = labarr[split_pos:]
+def make_data():
+    global datarr, labarr, traindata, trainlab, testdata, testlab
+    np.random.seed(1721204)
 
-print('train data')
-plot_data(traindata, trainlab, plotname='train_data_plot.png')
+    datarr, labarr = generate_data_set(
+        M=DataParameters.M,
+        s=DataParameters.s,
+        noise_scale=DataParameters.NOISE
+    )
+    print('full data')
+    plot_data(datarr, labarr, plotname='full_data_plot.png')
 
-print('test data')
-plot_data(testdata, testlab, plotname='test_data_plot.png')
+    split_pos = int(0.5 * datarr.shape[0])
+    traindata = datarr[:split_pos, :]
+    trainlab = labarr[:split_pos]
+    testdata = datarr[split_pos:, :]
+    testlab = labarr[split_pos:]
 
+    print('train data')
+    plot_data(traindata, trainlab, plotname='train_data_plot.png')
+
+    print('test data')
+    plot_data(testdata, testlab, plotname='test_data_plot.png')
+
+make_data()

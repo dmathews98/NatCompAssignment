@@ -23,6 +23,8 @@ def run_script(script):
                     kwargs[kw] = int(body)
                 elif head == 'F':
                     kwargs[kw] = float(body)
+                elif head == 'B':
+                    kwargs[kw] = (body == 'True')
                 else:
                     printout(f"WARNING: DIDN'T SPECIFY DATATYPE")
             if alg == 'SGD':
@@ -59,6 +61,12 @@ def run_script(script):
                 ga(**kwargs)
             elif alg == 'GP':
                 gp(**kwargs)
+            elif alg == 'DATA_PARAMETER':
+                for key, value in kwargs.items():
+                    printout(f'Changed Parameters: {key}->{value}')
+                    setattr(DataParameters, key, value)
+                    # Now we remake all the data!
+                    make_data.make_data()
             else:
                 printout(f"WARNING: Your process {alg} is not valid!")
 
