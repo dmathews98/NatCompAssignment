@@ -54,13 +54,14 @@ def sgd(**kwargs):
 
 
 psocount = 0
-def pso(**kwargs):
+def pso(SILENT=False, GRAB_NN_SCORE=False, **kwargs):
     global psocount
     psocount += 1
-    printout(
-        "ARGS: ",
-        kwargs
-    )
+    if not SILENT:
+        printout(
+            "ARGS: ",
+            kwargs
+        )
 
     fitness_func, evaluate_func, dimensions, nn = make_data.prepare_neural_net(
         DataParameters.Q,
@@ -70,7 +71,8 @@ def pso(**kwargs):
         make_data.trainlab#testlab
     )
     
-    printout(f"PSO {psocount} Training for {kwargs['time_steps']} Epochs with Population {kwargs['population_size']}")
+    if not SILENT:
+        printout(f"PSO {psocount} Training for {kwargs['time_steps']} Epochs with Population {kwargs['population_size']}")
     swarm, best = PSO(
         dim=dimensions,
         fitness_func=fitness_func,
@@ -78,10 +80,13 @@ def pso(**kwargs):
         **kwargs
     ).run()
     nn.set_weights(best/DataParameters.SCALE)
-    #print(nn.evaluate(make_data.testdata, make_data.testlab))
-    printout(f"PSO Training Over!  Score: {nn.evaluate(make_data.testdata, make_data.testlab)}")
     
-    make_data.plot_data(make_data.testdata, make_data.testlab, nn, verbose=False, plotname=f'pso{psocount}.png')
+    if not SILENT:
+        printout(f"PSO Training Over!  Score: {nn.evaluate(make_data.testdata, make_data.testlab)}")
+        make_data.plot_data(make_data.testdata, make_data.testlab, nn, verbose=False, plotname=f'pso{psocount}.png')
+
+    if GRAB_NN_SCORE:
+        return nn.evaluate(make_data.testdata, make_data.testlab)
 
 gacount = 0
 def ga(**kwargs):
