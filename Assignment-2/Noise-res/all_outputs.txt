@@ -1,0 +1,30 @@
+Saved Figure as "[1]full_data_plot.pdf"
+Saved Figure as "[2]train_data_plot.pdf"
+Saved Figure as "[3]test_data_plot.pdf"
+Changed Parameters: NOISE->0.5
+Saved Figure as "[4]full_data_plot.pdf"
+Saved Figure as "[5]train_data_plot.pdf"
+Saved Figure as "[6]test_data_plot.pdf"
+ARGS: {'population_size': 30, 'time_steps': 1000, 'averaging': 100}
+Gradient Descent 1 Training for 1000 Epochs with 30 per Batch
+Gradient Descent Over!  Avg Score: 0.4453474673628807 Deviation: 0.037424919797672214 Best: 0.43497562408447266 Worst: 0.6391984820365906
+Avg Accuracy: 0.8724799996614456 Deviation: 0.04358084138235812 Best: 0.6079999804496765 Worst: 0.8920000195503235
+Saved Figure as "[7]sgd_gradient_descent1_pop30_time1000_avg100.pdf"
+Saved Figure as "[8]sgd_test_result1.pdf"
+Raw kwargs: {'total_a': 3.4, 'a1_percent': 0.5, 'epsilon': -0.21, 'population_size': 30, 'time_steps': 1000, 'a3': 0.0}
+ARGS: {'w': 0.5021822170828449, 'a1': 1.7, 'a2': 1.7, 'a3': 0.0, 'population_size': 30, 'time_steps': 1000, 'search_range': 1000, 'constrainer': <function run_script.<locals>.<lambda> at 0x7f223eca1160>}
+PSO 1 Training for 1000 Epochs with Population 30
+PSO Training Over!  Score: [0.4272737205028534, 0.9079999923706055]
+Saved Figure as "[9]pso1.pdf"
+ARGS: {'population_size': 30, 'time_steps': 100, 'mutation_rate': 0.1, 'crossover_rate': 0.8, 'train_epochs': 200, 'test_epochs': 1000, 'batch': 20}
+GA 1 Training for 100 Generations with Population 30
+GA Best (with genotype 1 101 Uniform,1 011 HeNormal,1 010 Normal,1 100 Uniform,1 011 Uniform): [0.34613096714019775, 0.9079999923706055]
+Saved Figure as "[10]plot_of_ga_accuracies_over_time.pdf"
+Saved Figure as "[11]ga1.pdf"
+ARGS: {'population_size': 30, 'time_steps': 100, 'mutation_rate': 0.5, 'crossover_rate': 0.1, 'flip_chance': 0.5, 'whither_rate': 0.8, 'growth_rate': 0.1, 'train_epochs': 200, 'test_epochs': 1000, 'batch': 20}
+GP 1 Training for 100 Generations with Population 30
+Saved Figure as "[12]depthhistory1.pdf"
+GP Best (binary_crossentropy, accuracy): [0.5946568250656128, 0.7200000286102295]
+ With key: Swish[3, Uniform]: (Input,Input)
+Saved Figure as "[13]plot_of_gp_accuracies_over_time.pdf"
+Saved Figure as "[14]gp1.pdf"
