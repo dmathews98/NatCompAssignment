@@ -1,0 +1,24 @@
+Saved Figure as "[1]full_data_plot.pdf"
+Saved Figure as "[2]train_data_plot.pdf"
+Saved Figure as "[3]test_data_plot.pdf"
+ARGS: {'population_size': 4, 'time_steps': 100, 'mutation_rate': 0.5, 'crossover_rate': 0.0, 'flip_chance': 0.5, 'whither_rate': 0.1, 'growth_rate': 0.1, 'train_epochs': 200, 'test_epochs': 1000, 'batch': 20}
+GP 1 Training for 100 Generations with Population 4
+Saved Figure as "[4]depthhistory1.pdf"
+GP Best (binary_crossentropy, accuracy): [0.0429425910115242, 0.9959999918937683]
+ With key: Swish[7, Uniform]: (Input,ReLU[8, Normal]: (Input,Input))
+Saved Figure as "[5]plot_of_gp_accuracies_over_time.pdf"
+Saved Figure as "[6]gp1.pdf"
+ARGS: {'population_size': 4, 'time_steps': 100, 'mutation_rate': 0.5, 'crossover_rate': 0.1, 'flip_chance': 0.5, 'whither_rate': 0.1, 'growth_rate': 0.1, 'train_epochs': 200, 'test_epochs': 1000, 'batch': 20}
+GP 2 Training for 100 Generations with Population 4
+Saved Figure as "[7]depthhistory2.pdf"
+GP Best (binary_crossentropy, accuracy): [0.1002972424030304, 0.984000027179718]
+ With key: Swish[7, Zeroes]: (Swish[4, Normal]: (Swish[4, Zeroes]: (Input,Sigmoid[3, HeNormal]: (Input,Input)),Input),Input)
+Saved Figure as "[8]plot_of_gp_accuracies_over_time.pdf"
+Saved Figure as "[9]gp2.pdf"
+ARGS: {'population_size': 20, 'time_steps': 100, 'mutation_rate': 0.5, 'crossover_rate': 0.0, 'flip_chance': 0.5, 'whither_rate': 0.1, 'growth_rate': 0.1, 'train_epochs': 200, 'test_epochs': 1000, 'batch': 20}
+GP 3 Training for 100 Generations with Population 20
+Saved Figure as "[10]depthhistory3.pdf"
+GP Best (binary_crossentropy, accuracy): [0.0515131950378418, 0.9959999918937683]
+ With key: Linear[1, HeNormal]: (ReLU[8, Uniform]: (Linear[2, Uniform]: (Linear[6, Zeroes]: (Input,Input),Swish[10, Zeroes]: (Swish[8, Uniform]: (Input,Input),Input)),Input),Input)
+Saved Figure as "[11]plot_of_gp_accuracies_over_time.pdf"
+Saved Figure as "[12]gp3.pdf"

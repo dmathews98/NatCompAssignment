@@ -1,0 +1,129 @@
+2020-11-16 10:17:13.372925: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN)to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2020-11-16 10:17:13.378715: I tensorflow/core/platform/profile_utils/cpu_utils.cc:104] CPU Frequency: 2345480000 Hz
+2020-11-16 10:17:13.380514: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x56157fa63a80 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-11-16 10:17:13.380532: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+2020-11-16 10:17:33.572602: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN)to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2020-11-16 10:17:33.578094: I tensorflow/core/platform/profile_utils/cpu_utils.cc:104] CPU Frequency: 2345480000 Hz
+2020-11-16 10:17:33.579512: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x56480f5ebea0 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-11-16 10:17:33.579529: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+full data
+[SAVED TO all_outputs.txt] Saved Figure as "[1]full_data_plot.pdf"
+train data
+[SAVED TO all_outputs.txt] Saved Figure as "[2]train_data_plot.pdf"
+test data
+[SAVED TO all_outputs.txt] Saved Figure as "[3]test_data_plot.pdf"
+[SAVED TO all_outputs.txt] ARGS:  {'population_size': 30, 'time_steps': 100, 'mutation_rate': 0.1, 'crossover_rate': 0.8, 'train_epochs': 200, 'test_epochs': 1000, 'batch': 20}
+[SAVED TO all_outputs.txt] GA 1 Training for 100 Generations with Population 30
+1/100: Best Fitness 0.48349618911743164
+6/100: Best Fitness 0.4081087112426758
+11/100: Best Fitness 0.33728721737861633
+16/100: Best Fitness 0.32882988452911377
+21/100: Best Fitness 0.32882988452911377
+26/100: Best Fitness 0.2612228989601135
+31/100: Best Fitness 0.2612228989601135
+36/100: Best Fitness 0.2612228989601135
+41/100: Best Fitness 0.2612228989601135
+46/100: Best Fitness 0.2612228989601135
+51/100: Best Fitness 0.25197669863700867
+56/100: Best Fitness 0.25197669863700867
+61/100: Best Fitness 0.25197669863700867
+66/100: Best Fitness 0.25197669863700867
+71/100: Best Fitness 0.2485780268907547
+76/100: Best Fitness 0.2485780268907547
+81/100: Best Fitness 0.2485780268907547
+86/100: Best Fitness 0.2485780268907547
+91/100: Best Fitness 0.2485780268907547
+96/100: Best Fitness 0.2485780268907547
+100/100: Best Fitness 0.2485780268907547
+Model: "sequential_3031"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+dense_10632 (Dense)          (None, 11)                55        
+_________________________________________________________________
+re_lu_7601 (ReLU)            (None, 11)                0         
+_________________________________________________________________
+dense_10633 (Dense)          (None, 5)                 60        
+_________________________________________________________________
+re_lu_7602 (ReLU)            (None, 5)                 0         
+_________________________________________________________________
+dense_10634 (Dense)          (None, 15)                90        
+_________________________________________________________________
+re_lu_7603 (ReLU)            (None, 15)                0         
+_________________________________________________________________
+dense_10635 (Dense)          (None, 9)                 144       
+_________________________________________________________________
+re_lu_7604 (ReLU)            (None, 9)                 0         
+_________________________________________________________________
+dense_10636 (Dense)          (None, 1)                 10        
+=================================================================
+Total params: 359
+Trainable params: 359
+Non-trainable params: 0
+_________________________________________________________________
+1/8 [==>...........................] - ETA: 0s - loss: 0.1455 - accuracy: 1.00008/8 [==============================] - 0s 457us/step - loss: 0.1508 - accuracy: 0.9880
+[SAVED TO all_outputs.txt] GA Best (with genotype 0 110 Normal,1 101 Uniform,1 010 Normal,1 111 HeNormal,1 100 Zeroes):  [0.1507944017648697, 0.9879999756813049]
+[SAVED TO all_outputs.txt] Saved Figure as "[4]plot_of_ga_accuracies_over_time.pdf"
+[SAVED TO all_outputs.txt] Saved Figure as "[5]ga1.pdf"
+[SAVED TO all_outputs.txt] ARGS:  {'population_size': 30, 'time_steps': 100, 'mutation_rate': 0.5, 'crossover_rate': 0.1, 'flip_chance': 0.5, 'whither_rate': 0.8, 'growth_rate': 0.1, 'train_epochs': 200, 'test_epochs': 1000, 'batch': 20}
+[SAVED TO all_outputs.txt] GP 1 Training for 100 Generations with Population 30
+1/100: Best Fitness 0.5277342796325684
+6/100: Best Fitness 0.5277342796325684
+11/100: Best Fitness 0.44443222880363464
+16/100: Best Fitness 0.4429323077201843
+21/100: Best Fitness 0.4429323077201843
+26/100: Best Fitness 0.4429323077201843
+31/100: Best Fitness 0.4429323077201843
+36/100: Best Fitness 0.4429323077201843
+41/100: Best Fitness 0.4429323077201843
+46/100: Best Fitness 0.4429323077201843
+51/100: Best Fitness 0.4429323077201843
+56/100: Best Fitness 0.3709004521369934
+61/100: Best Fitness 0.3709004521369934
+66/100: Best Fitness 0.3709004521369934
+71/100: Best Fitness 0.3709004521369934
+76/100: Best Fitness 0.3709004521369934
+81/100: Best Fitness 0.3709004521369934
+86/100: Best Fitness 0.3709004521369934
+91/100: Best Fitness 0.3709004521369934
+96/100: Best Fitness 0.3709004521369934
+100/100: Best Fitness 0.3709004521369934
+Model: "functional_6063"
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_3032 (InputLayer)         [(None, 500, 4)]     0                                            
+__________________________________________________________________________________________________
+dense_18654 (Dense)             (None, 500, 4)       20          input_3032[0][0]                 
+__________________________________________________________________________________________________
+dense_18655 (Dense)             (None, 500, 4)       20          input_3032[0][0]                 
+__________________________________________________________________________________________________
+concatenate_978 (Concatenate)   (None, 500, 8)       0           dense_18654[0][0]                
+                                                                 dense_18655[0][0]                
+__________________________________________________________________________________________________
+dense_18656 (Dense)             (None, 500, 5)       45          concatenate_978[0][0]            
+__________________________________________________________________________________________________
+dense_18653 (Dense)             (None, 500, 4)       20          input_3032[0][0]                 
+__________________________________________________________________________________________________
+re_lu_7968 (ReLU)               (None, 500, 5)       0           dense_18656[0][0]                
+__________________________________________________________________________________________________
+concatenate_977 (Concatenate)   (None, 500, 9)       0           dense_18653[0][0]                
+                                                                 re_lu_7968[0][0]                 
+__________________________________________________________________________________________________
+dense_18657 (Dense)             (None, 500, 5)       50          concatenate_977[0][0]            
+__________________________________________________________________________________________________
+activation_614 (Activation)     (None, 500, 5)       0           dense_18657[0][0]                
+__________________________________________________________________________________________________
+dense_18658 (Dense)             (None, 500, 1)       6           activation_614[0][0]             
+==================================================================================================
+Total params: 161
+Trainable params: 161
+Non-trainable params: 0
+__________________________________________________________________________________________________
+1/8 [==>...........................] - ETA: 0s - loss: 0.0705 - accuracy: 1.00008/8 [==============================] - 0s 461us/step - loss: 0.0659 - accuracy: 0.9960
+[SAVED TO all_outputs.txt] GP Best (binary_crossentropy, accuracy):  [0.0658617839217186, 0.9959999918937683] 
+ With key: Swish[5, Normal]: (Input,ReLU[5, Normal]: (Input,Input))
+[SAVED TO all_outputs.txt] Saved Figure as "[6]plot_of_gp_accuracies_over_time.pdf"
+[SAVED TO all_outputs.txt] Saved Figure as "[7]gp1.pdf"

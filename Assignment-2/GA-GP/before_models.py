@@ -49,19 +49,18 @@ def sgd(**kwargs):
     printout(f"Gradient Descent Over!  Avg Score: {scores[:, 0].mean()} Deviation: {scores[:, 0].std()} Best: {scores[:, 0].min()} Worst: {scores[:, 0].max()}")
     printout(f"Avg Accuracy: {scores[:, 1].mean()} Deviation: {scores[:, 1].std()} Best: {scores[:, 1].min()} Worst: {scores[:, 1].max()}")
     plt.plot(scores)
-    showout(f'sgd_gradient_descent{sgdcount}_pop{kwargs["population_size"]}_time{kwargs["time_steps"]}_avg{kwargs["averaging"]}.png') #plt.show()
-    make_data.plot_data(make_data.testdata, make_data.testlab, best_net, verbose=False, plotname=f"sgd_test_result{sgdcount}.png")
+    showout(f'sgd_gradient_descent{sgdcount}_pop{kwargs["population_size"]}_time{kwargs["time_steps"]}_avg{kwargs["averaging"]}.pdf') #plt.show()
+    make_data.plot_data(make_data.testdata, make_data.testlab, best_net, verbose=False, plotname=f"sgd_test_result{sgdcount}.pdf")
 
 
 psocount = 0
-def pso(SILENT=False, GRAB_NN_SCORE=False, **kwargs):
+def pso(**kwargs):
     global psocount
     psocount += 1
-    if not SILENT:
-        printout(
-            "ARGS: ",
-            kwargs
-        )
+    printout(
+        "ARGS: ",
+        kwargs
+    )
 
     fitness_func, evaluate_func, dimensions, nn = make_data.prepare_neural_net(
         DataParameters.Q,
@@ -71,8 +70,7 @@ def pso(SILENT=False, GRAB_NN_SCORE=False, **kwargs):
         make_data.trainlab#testlab
     )
     
-    if not SILENT:
-        printout(f"PSO {psocount} Training for {kwargs['time_steps']} Epochs with Population {kwargs['population_size']}")
+    printout(f"PSO {psocount} Training for {kwargs['time_steps']} Epochs with Population {kwargs['population_size']}")
     swarm, best = PSO(
         dim=dimensions,
         fitness_func=fitness_func,
@@ -80,13 +78,10 @@ def pso(SILENT=False, GRAB_NN_SCORE=False, **kwargs):
         **kwargs
     ).run()
     nn.set_weights(best/DataParameters.SCALE)
+    #print(nn.evaluate(make_data.testdata, make_data.testlab))
+    printout(f"PSO Training Over!  Score: {nn.evaluate(make_data.testdata, make_data.testlab)}")
     
-    if not SILENT:
-        printout(f"PSO Training Over!  Score: {nn.evaluate(make_data.testdata, make_data.testlab)}")
-        make_data.plot_data(make_data.testdata, make_data.testlab, nn, verbose=False, plotname=f'pso{psocount}.png')
-
-    if GRAB_NN_SCORE:
-        return nn.evaluate(make_data.testdata, make_data.testlab)
+    make_data.plot_data(make_data.testdata, make_data.testlab, nn, verbose=False, plotname=f'pso{psocount}.pdf')
 
 gacount = 0
 def ga(**kwargs):
@@ -143,9 +138,9 @@ def ga(**kwargs):
     #print("Plot of (Training) Accuracies over Time")
     plt.plot(np.array(over_time))
     #plt.show()
-    showout('plot_of_ga_accuracies_over_time.png')
+    showout('plot_of_ga_accuracies_over_time.pdf')
     
-    make_data.plot_data(make_data.testdata, make_data.testlab, nn, verbose=False, plotname=f'ga{gacount}.png')
+    make_data.plot_data(make_data.testdata, make_data.testlab, nn, verbose=False, plotname=f'ga{gacount}.pdf')
                 
 
 gpcount = 0
@@ -176,7 +171,6 @@ def gp(**kwargs):
         batch=kwargs['population_size'],
         generations=kwargs['time_steps']
     )
-    testgp.plot_statistics(0, f'depthhistory{gpcount}')
     #print(f"Best Model (Loss; {best[0]}): ")
     nn = testgp.genotype_to_neural_net(best[1], make_data.datarr)
     nn.summary()
@@ -195,6 +189,6 @@ def gp(**kwargs):
         f"\n With key: {best[1]}"
     )
     plt.plot(np.array(over_time))
-    showout('plot_of_gp_accuracies_over_time.png')
+    showout('plot_of_gp_accuracies_over_time.pdf')
     
-    make_data.plot_data(make_data.testdata, make_data.testlab, nn, verbose=False, plotname=f'gp{gpcount}.png')
+    make_data.plot_data(make_data.testdata, make_data.testlab, nn, verbose=False, plotname=f'gp{gpcount}.pdf')
