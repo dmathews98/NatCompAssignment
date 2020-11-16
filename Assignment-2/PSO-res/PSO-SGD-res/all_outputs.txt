@@ -1,0 +1,51 @@
+Saved Figure as "[1]full_data_plot.pdf"
+Saved Figure as "[2]train_data_plot.pdf"
+Saved Figure as "[3]test_data_plot.pdf"
+ARGS: {'population_size': 30, 'time_steps': 1000, 'averaging': 100}
+Gradient Descent 1 Training for 1000 Epochs with 30 per Batch
+Gradient Descent Over!  Avg Score: 0.21085353225469589 Deviation: 0.02677289654987545 Best: 0.20719514787197113 Worst: 0.4681067168712616
+Avg Accuracy: 0.9747600108385086 Deviation: 0.011195641110826939 Best: 0.8640000224113464 Worst: 0.9760000109672546
+Saved Figure as "[4]sgd_gradient_descent1_pop30_time1000_avg100.pdf"
+Saved Figure as "[5]sgd_test_result1.pdf"
+ARGS: {'population_size': 30, 'time_steps': 2000, 'averaging': 100}
+Gradient Descent 2 Training for 2000 Epochs with 30 per Batch
+Gradient Descent Over!  Avg Score: 0.25824955374002456 Deviation: 0.020221206418294432 Best: 0.2553418278694153 Worst: 0.4567384123802185
+Avg Accuracy: 0.9884399801492691 Deviation: 0.011025713379096922 Best: 0.8840000033378601 Worst: 0.9919999837875366
+Saved Figure as "[6]sgd_gradient_descent2_pop30_time2000_avg100.pdf"
+Saved Figure as "[7]sgd_test_result2.pdf"
+Raw kwargs: {'total_a': 3.4, 'a1_percent': 0.5, 'epsilon': -0.21, 'population_size': 30, 'time_steps': 1000, 'a3': 0.0}
+ARGS: {'w': 0.5021822170828449, 'a1': 1.7, 'a2': 1.7, 'a3': 0.0, 'population_size': 30, 'time_steps': 1000, 'search_range': 1000, 'constrainer': <function run_script.<locals>.<lambda> at 0x7fc810650310>}
+PSO 1 Training for 1000 Epochs with Population 30
+PSO Training Over!  Score: [0.5070058107376099, 0.8159999847412109]
+Saved Figure as "[8]pso1.pdf"
+Raw kwargs: {'total_a': 3.4, 'a1_percent': 0.5, 'epsilon': -0.21, 'population_size': 30, 'time_steps': 2000, 'a3': 0.0}
+ARGS: {'w': 0.5021822170828449, 'a1': 1.7, 'a2': 1.7, 'a3': 0.0, 'population_size': 30, 'time_steps': 2000, 'search_range': 1000, 'constrainer': <function run_script.<locals>.<lambda> at 0x7fc81031c160>}
+PSO 2 Training for 2000 Epochs with Population 30
+PSO Training Over!  Score: [0.3963075876235962, 0.8519999980926514]
+Saved Figure as "[9]pso2.pdf"
+Changed Parameters: USE_LINEAR_ONLY_MODEL->True
+Saved Figure as "[10]full_data_plot.pdf"
+Saved Figure as "[11]train_data_plot.pdf"
+Saved Figure as "[12]test_data_plot.pdf"
+ARGS: {'population_size': 30, 'time_steps': 1000, 'averaging': 100}
+Gradient Descent 3 Training for 1000 Epochs with 30 per Batch
+Gradient Descent Over!  Avg Score: 0.2665566688776016 Deviation: 0.07448299771460418 Best: 0.2416398972272873 Worst: 0.6668485999107361
+Avg Accuracy: 0.9693200242519379 Deviation: 0.05425880950176504 Best: 0.6359999775886536 Worst: 0.984000027179718
+Saved Figure as "[13]sgd_gradient_descent3_pop30_time1000_avg100.pdf"
+Saved Figure as "[14]sgd_test_result3.pdf"
+ARGS: {'population_size': 30, 'time_steps': 2000, 'averaging': 100}
+Gradient Descent 4 Training for 2000 Epochs with 30 per Batch
+Gradient Descent Over!  Avg Score: 0.1869582162797451 Deviation: 0.0036706438949641036 Best: 0.18636663258075714 Worst: 0.2228356897830963
+Avg Accuracy: 0.9998399996757508 Deviation: 0.000783838306181127 Best: 0.9959999918937683 Worst: 1.0
+Saved Figure as "[15]sgd_gradient_descent4_pop30_time2000_avg100.pdf"
+Saved Figure as "[16]sgd_test_result4.pdf"
+Raw kwargs: {'total_a': 3.9, 'a1_percent': 0.5, 'epsilon': -0.25, 'population_size': 30, 'time_steps': 1000, 'a3': 0.0}
+ARGS: {'w': 0.7003164683737002, 'a1': 1.95, 'a2': 1.95, 'a3': 0.0, 'population_size': 30, 'time_steps': 1000, 'search_range': 1000, 'constrainer': <function run_script.<locals>.<lambda> at 0x7fc810581b80>}
+PSO 3 Training for 1000 Epochs with Population 30
+PSO Training Over!  Score: [0.7092339992523193, 0.4880000054836273]
+Saved Figure as "[17]pso3.pdf"
+Raw kwargs: {'total_a': 3.9, 'a1_percent': 0.5, 'epsilon': -0.25, 'population_size': 30, 'time_steps': 2000, 'a3': 0.0}
+ARGS: {'w': 0.7003164683737002, 'a1': 1.95, 'a2': 1.95, 'a3': 0.0, 'population_size': 30, 'time_steps': 2000, 'search_range': 1000, 'constrainer': <function run_script.<locals>.<lambda> at 0x7fc7905f83a0>}
+PSO 4 Training for 2000 Epochs with Population 30
+PSO Training Over!  Score: [0.6605444550514221, 0.6919999718666077]
+Saved Figure as "[18]pso4.pdf"
