@@ -155,6 +155,11 @@ def printout(*args):
 def showout(filename):
     global total_imgs
     total_imgs += 1
+    # Make it always save as pdf
+    if '.' in filename:
+        filename = '.'.join(filename.split('.')[:-1]) + '.pdf'
+    else:
+        filename += '.pdf'
     if COLAB:
         plt.show()
     else:
