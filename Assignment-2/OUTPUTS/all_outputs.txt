@@ -1,23 +1,8 @@
 Saved Figure as "[1]full_data_plot.pdf"
 Saved Figure as "[2]train_data_plot.pdf"
 Saved Figure as "[3]test_data_plot.pdf"
-ARGS: {'population_size': 30, 'time_steps': 1000, 'averaging': 100}
-Gradient Descent 1 Training for 1000 Epochs with 30 per Batch
-Gradient Descent Over!  Avg Score: 0.21085353225469589 Deviation: 0.02677289654987545 Best: 0.20719514787197113 Worst: 0.4681067168712616
-Avg Accuracy: 0.9747600108385086 Deviation: 0.011195641110826939 Best: 0.8640000224113464 Worst: 0.9760000109672546
-Saved Figure as "[4]sgd_gradient_descent1_pop30_time1000_avg100.pdf"
-Saved Figure as "[5]sgd_test_result1.pdf"
-ARGS: {'population_size': 30, 'time_steps': 2000, 'averaging': 100}
-Gradient Descent 2 Training for 2000 Epochs with 30 per Batch
-Gradient Descent Over!  Avg Score: 0.25824955374002456 Deviation: 0.020221206418294432 Best: 0.2553418278694153 Worst: 0.4567384123802185
-Avg Accuracy: 0.9884399801492691 Deviation: 0.011025713379096922 Best: 0.8840000033378601 Worst: 0.9919999837875366
-Saved Figure as "[6]sgd_gradient_descent2_pop30_time2000_avg100.pdf"
-Saved Figure as "[7]sgd_test_result2.pdf"
-Raw kwargs: {'total_a': 3.4, 'a1_percent': 0.5, 'epsilon': -0.21, 'population_size': 30, 'time_steps': 1000, 'a3': 0.0}
-ARGS: {'w': 0.5021822170828449, 'a1': 1.7, 'a2': 1.7, 'a3': 0.0, 'population_size': 30, 'time_steps': 1000, 'search_range': 1000, 'constrainer': <function run_script.<locals>.<lambda> at 0x7fc810650310>}
+Raw kwargs: {'total_a': 0.8, 'a1_percent': 0.5, 'epsilon': -0.766, 'population_size': 30, 'time_steps': 1000, 'a3': 0.0}
+ARGS: {'w': -0.7548543819998315, 'a1': 0.4, 'a2': 0.4, 'a3': 0.0, 'population_size': 30, 'time_steps': 1000, 'search_range': 1000, 'constrainer': <function run_script.<locals>.<lambda> at 0x7f4491355a60>}
 PSO 1 Training for 1000 Epochs with Population 30
-PSO Training Over!  Score: [0.5070058107376099, 0.8159999847412109]
-Saved Figure as "[8]pso1.pdf"
-Raw kwargs: {'total_a': 3.4, 'a1_percent': 0.5, 'epsilon': -0.21, 'population_size': 30, 'time_steps': 2000, 'a3': 0.0}
-ARGS: {'w': 0.5021822170828449, 'a1': 1.7, 'a2': 1.7, 'a3': 0.0, 'population_size': 30, 'time_steps': 2000, 'search_range': 1000, 'constrainer': <function run_script.<locals>.<lambda> at 0x7fc81031c160>}
-PSO 2 Training for 2000 Epochs with Population 30
+PSO Training Over!  Score: [0.6655126214027405, 0.6439999938011169]
+Saved Figure as "[4]pso1.pdf"
