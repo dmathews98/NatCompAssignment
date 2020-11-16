@@ -760,3 +760,21 @@ GP Best (binary_crossentropy, accuracy): [0.06456829607486725, 0.995999991893768
  With key: ReLU[5, Uniform]: (ReLU[2, Normal]: (ReLU[7, HeNormal]: (ReLU[4, Zeroes]: (Input,Input),Input),Input),Input)
 Saved Figure as "[5]plot_of_gp_accuracies_over_time.pdf"
 Saved Figure as "[6]gp1.pdf"
+Saved Figure as "[1]full_data_plot.pdf"
+Saved Figure as "[2]train_data_plot.pdf"
+Saved Figure as "[3]test_data_plot.pdf"
+ARGS: {'population_size': 2, 'time_steps': 2, 'averaging': 2}
+Gradient Descent 1 Training for 2 Epochs with 2 per Batch
+Gradient Descent Over!  Avg Score: 1.013321578502655 Deviation: 0.20650678873062134 Best: 0.8068147897720337 Worst: 1.2198283672332764
+Avg Accuracy: 0.4959999918937683 Deviation: 0.019999980926513672 Best: 0.47600001096725464 Worst: 0.515999972820282
+Saved Figure as "[4]sgd_gradient_descent1_pop2_time2_avg2.pdf"
+Saved Figure as "[5]sgd_test_result1.pdf"
+Raw kwargs: {'total_a': 3.4, 'a1_percent': 0.5, 'epsilon': -0.21, 'population_size': 2, 'time_steps': 2, 'a3': 0.0}
+ARGS: {'w': 0.5021822170828449, 'a1': 1.7, 'a2': 1.7, 'a3': 0.0, 'population_size': 2, 'time_steps': 2, 'search_range': 1000, 'constrainer': <function run_script.<locals>.<lambda> at 0x842bab598>}
+PSO 1 Training for 2 Epochs with Population 2
+PSO Training Over!  Score: [0.7557687759399414, 0.5199999809265137]
+Saved Figure as "[6]pso1.pdf"
+ARGS: {'population_size': 2, 'time_steps': 2, 'mutation_rate': 0.1, 'crossover_rate': 0.5, 'train_epochs': 100, 'test_epochs': 100, 'batch': 5}
+GA 1 Training for 2 Generations with Population 2
+GA Best (with genotype 1 0001 Uniform,0 1110 Zeroes,0 1010 Normal,0 1110 Uniform,0 1001 HeNormal): [0.6716896891593933, 0.6240000128746033]
+Saved Figure as "[7]plot_of_ga_accuracies_over_time.pdf"

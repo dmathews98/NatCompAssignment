@@ -128,7 +128,7 @@ def ga(**kwargs):
         bpl = DataParameters.GA_BITS_PER_LAYER()
         string = ','.join([
             geno[i * bpl: i * bpl + DataParameters.GA_DUPLI_SIZE] + ' '
-            + geno[i * bpl + DataParameters.GA_DUPLI_SIZE: i * bpl + DataParameters.GA_LAYER_SIZE] + ' '
+            + geno[i * bpl + DataParameters.GA_DUPLI_SIZE: i * bpl + DataParameters.GA_LAYER_SIZE + DataParameters.GA_DUPLI_SIZE] + ' '
             + DataParameters.INITIALIZER_STRING(
                 int(geno[i * bpl + DataParameters.GA_DUPLI_SIZE + DataParameters.GA_LAYER_SIZE: (i + 1) * bpl], 2)
             )
