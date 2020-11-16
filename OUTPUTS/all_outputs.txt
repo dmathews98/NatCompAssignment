@@ -747,3 +747,16 @@ GP Best (binary_crossentropy, accuracy): [0.6719544529914856, 0.7239999771118164
  With key: ReLU[1, HeNormal]: (Input,Swish[6, Uniform]: (Input,Input))
 Saved Figure as "[21]plot_of_gp_accuracies_over_time.pdf"
 Saved Figure as "[22]gp2.pdf"
+Saved Figure as "[1]full_data_plot.pdf"
+Saved Figure as "[2]train_data_plot.pdf"
+Saved Figure as "[3]test_data_plot.pdf"
+Saved Figure as "[1]full_data_plot.pdf"
+Saved Figure as "[2]train_data_plot.pdf"
+Saved Figure as "[3]test_data_plot.pdf"
+ARGS: {'population_size': 2, 'time_steps': 2, 'mutation_rate': 0.5, 'crossover_rate': 0.1, 'flip_chance': 0.5, 'whither_rate': 0.1, 'growth_rate': 0.1, 'train_epochs': 100, 'test_epochs': 1000, 'batch': 5}
+GP 1 Training for 2 Generations with Population 2
+Saved Figure as "[4]depthhistory1.pdf"
+GP Best (binary_crossentropy, accuracy): [0.06456829607486725, 0.9959999918937683]
+ With key: ReLU[5, Uniform]: (ReLU[2, Normal]: (ReLU[7, HeNormal]: (ReLU[4, Zeroes]: (Input,Input),Input),Input),Input)
+Saved Figure as "[5]plot_of_gp_accuracies_over_time.pdf"
+Saved Figure as "[6]gp1.pdf"
