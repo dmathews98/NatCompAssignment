@@ -1,0 +1,110 @@
+2020-11-16 20:25:05.492717: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN)to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2020-11-16 20:25:05.499437: I tensorflow/core/platform/profile_utils/cpu_utils.cc:104] CPU Frequency: 2345480000 Hz
+2020-11-16 20:25:05.501355: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x55870b0f6460 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-11-16 20:25:05.501374: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+full data
+[SAVED TO all_outputs.txt] Saved Figure as "[1]full_data_plot.pdf"
+train data
+[SAVED TO all_outputs.txt] Saved Figure as "[2]train_data_plot.pdf"
+test data
+[SAVED TO all_outputs.txt] Saved Figure as "[3]test_data_plot.pdf"
+[SAVED TO all_outputs.txt] ARGS:  {'population_size': 4, 'time_steps': 100, 'mutation_rate': 0.5, 'crossover_rate': 0.0, 'flip_chance': 0.5, 'whither_rate': 0.1, 'growth_rate': 0.1, 'train_epochs': 200, 'test_epochs': 1000, 'batch': 20}
+[SAVED TO all_outputs.txt] GP 1 Training for 100 Generations with Population 4
+1/100: Best Fitness 0.3398434817790985
+6/100: Best Fitness 0.0814778208732605
+11/100: Best Fitness 0.0814778208732605
+16/100: Best Fitness 0.0814778208732605
+21/100: Best Fitness 0.0814778208732605
+26/100: Best Fitness 0.0814778208732605
+31/100: Best Fitness 0.0814778208732605
+36/100: Best Fitness 0.0814778208732605
+41/100: Best Fitness 0.0814778208732605
+46/100: Best Fitness 0.0814778208732605
+51/100: Best Fitness 0.0814778208732605
+56/100: Best Fitness 0.0814778208732605
+61/100: Best Fitness 0.0814778208732605
+66/100: Best Fitness 0.0814778208732605
+71/100: Best Fitness 0.0814778208732605
+76/100: Best Fitness 0.0814778208732605
+81/100: Best Fitness 0.0814778208732605
+86/100: Best Fitness 0.0814778208732605
+91/100: Best Fitness 0.0814778208732605
+96/100: Best Fitness 0.0814778208732605
+100/100: Best Fitness 0.0814778208732605
+[SAVED TO all_outputs.txt] Saved Figure as "[4]depthhistory1.pdf"
+Model: "functional_811"
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_406 (InputLayer)          [(None, 500, 4)]     0                                            
+__________________________________________________________________________________________________
+dense_4134 (Dense)              (None, 500, 4)       20          input_406[0][0]                  
+__________________________________________________________________________________________________
+dense_4135 (Dense)              (None, 500, 4)       20          input_406[0][0]                  
+__________________________________________________________________________________________________
+dense_4137 (Dense)              (None, 500, 4)       20          input_406[0][0]                  
+__________________________________________________________________________________________________
+dense_4138 (Dense)              (None, 500, 4)       20          input_406[0][0]                  
+__________________________________________________________________________________________________
+concatenate_1665 (Concatenate)  (None, 500, 8)       0           dense_4134[0][0]                 
+                                                                 dense_4135[0][0]                 
+__________________________________________________________________________________________________
+concatenate_1666 (Concatenate)  (None, 500, 8)       0           dense_4137[0][0]                 
+                                                                 dense_4138[0][0]                 
+__________________________________________________________________________________________________
+dense_4136 (Dense)              (None, 500, 4)       36          concatenate_1665[0][0]           
+__________________________________________________________________________________________________
+dense_4139 (Dense)              (None, 500, 3)       27          concatenate_1666[0][0]           
+__________________________________________________________________________________________________
+re_lu_826 (ReLU)                (None, 500, 4)       0           dense_4136[0][0]                 
+__________________________________________________________________________________________________
+activation_836 (Activation)     (None, 500, 3)       0           dense_4139[0][0]                 
+__________________________________________________________________________________________________
+concatenate_1664 (Concatenate)  (None, 500, 7)       0           re_lu_826[0][0]                  
+                                                                 activation_836[0][0]             
+__________________________________________________________________________________________________
+dense_4140 (Dense)              (None, 500, 7)       56          concatenate_1664[0][0]           
+__________________________________________________________________________________________________
+re_lu_827 (ReLU)                (None, 500, 7)       0           dense_4140[0][0]                 
+__________________________________________________________________________________________________
+dense_4141 (Dense)              (None, 500, 4)       20          input_406[0][0]                  
+__________________________________________________________________________________________________
+dense_4143 (Dense)              (None, 500, 4)       20          input_406[0][0]                  
+__________________________________________________________________________________________________
+dense_4144 (Dense)              (None, 500, 4)       20          input_406[0][0]                  
+__________________________________________________________________________________________________
+concatenate_1663 (Concatenate)  (None, 500, 11)      0           re_lu_827[0][0]                  
+                                                                 dense_4141[0][0]                 
+__________________________________________________________________________________________________
+concatenate_1667 (Concatenate)  (None, 500, 8)       0           dense_4143[0][0]                 
+                                                                 dense_4144[0][0]                 
+__________________________________________________________________________________________________
+dense_4142 (Dense)              (None, 500, 2)       24          concatenate_1663[0][0]           
+__________________________________________________________________________________________________
+dense_4145 (Dense)              (None, 500, 6)       54          concatenate_1667[0][0]           
+__________________________________________________________________________________________________
+re_lu_828 (ReLU)                (None, 500, 2)       0           dense_4142[0][0]                 
+__________________________________________________________________________________________________
+activation_837 (Activation)     (None, 500, 6)       0           dense_4145[0][0]                 
+__________________________________________________________________________________________________
+concatenate_1662 (Concatenate)  (None, 500, 8)       0           re_lu_828[0][0]                  
+                                                                 activation_837[0][0]             
+__________________________________________________________________________________________________
+dense_4146 (Dense)              (None, 500, 5)       45          concatenate_1662[0][0]           
+__________________________________________________________________________________________________
+re_lu_829 (ReLU)                (None, 500, 5)       0           dense_4146[0][0]                 
+__________________________________________________________________________________________________
+dense_4147 (Dense)              (None, 500, 1)       6           re_lu_829[0][0]                  
+==================================================================================================
+Total params: 388
+Trainable params: 388
+Non-trainable params: 0
+__________________________________________________________________________________________________
+1/8 [==>...........................] - ETA: 0s - loss: 0.4784 - accuracy: 0.81258/8 [==============================] - 0s 528us/step - loss: 0.4924 - accuracy: 0.8320
+/home/s1610357/NatCompAssignment/Assignment-2/GP-GAinit/gp.py:301: RuntimeWarning: invalid value encountered in true_divide
+  p=chances / sum(chances)
+[SAVED TO all_outputs.txt] GP Best (binary_crossentropy, accuracy):  [0.4924003779888153, 0.8320000171661377] 
+ With key: ReLU[5, Uniform]: (ReLU[2, Normal]: (ReLU[7, HeNormal]: (ReLU[4, Zeroes]: (Input,Input),Linear[3, Zeroes]: (Input,Input)),Input),Swish[6, Uniform]: (Input,Input))
+[SAVED TO all_outputs.txt] Saved Figure as "[5]plot_of_gp_accuracies_over_time.pdf"
+[SAVED TO all_outputs.txt] Saved Figure as "[6]gp1.pdf"

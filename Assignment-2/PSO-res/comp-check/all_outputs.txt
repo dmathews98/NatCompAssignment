@@ -1,0 +1,8 @@
+Saved Figure as "[1]full_data_plot.pdf"
+Saved Figure as "[2]train_data_plot.pdf"
+Saved Figure as "[3]test_data_plot.pdf"
+Raw kwargs: {'total_a': 0.8, 'a1_percent': 0.5, 'epsilon': -0.766, 'population_size': 30, 'time_steps': 1000, 'a3': 0.0}
+ARGS: {'w': -0.7548543819998315, 'a1': 0.4, 'a2': 0.4, 'a3': 0.0, 'population_size': 30, 'time_steps': 1000, 'search_range': 1000, 'constrainer': <function run_script.<locals>.<lambda> at 0x7f4491355a60>}
+PSO 1 Training for 1000 Epochs with Population 30
+PSO Training Over!  Score: [0.6655126214027405, 0.6439999938011169]
+Saved Figure as "[4]pso1.pdf"
