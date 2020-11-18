@@ -4,22 +4,22 @@ from main import *
 def neworg(self):
     to_return = GPTree(
         label='ReLU',
-        info=5,
+        info=11,
         info2=2,
         children=[
             GPTree(
                 label='ReLU',
-                info=2,
+                info=5,
                 info2=1,
                 children=[
                     GPTree(
                         label='ReLU',
-                        info=7,
+                        info=15,
                         info2=0,
                         children=[
                             GPTree(
                                 label='ReLU',
-                                info=4,
+                                info=11,
                                 info2=3,
                                 children=[
                                     GPTree('Input'),
