@@ -1,0 +1,13 @@
+Saved Figure as "[1]full_data_plot.pdf"
+Saved Figure as "[2]train_data_plot.pdf"
+Saved Figure as "[3]test_data_plot.pdf"
+ARGS: {'population_size': 30, 'time_steps': 100, 'mutation_rate': 0.1, 'crossover_rate': 0.8, 'train_epochs': 200, 'test_epochs': 1000, 'batch': 20}
+GA 1 Training for 100 Generations with Population 30
+GA Best (with genotype 0 1100 Normal,1 1010 Uniform,1 0100 Normal,1 1110 HeNormal,1 1000 Zeroes): [0.1507944017648697, 0.9879999756813049]
+Saved Figure as "[4]plot_of_ga_accuracies_over_time.pdf"
+Saved Figure as "[5]ga1.pdf"
+ARGS: {'population_size': 4, 'time_steps': 100, 'mutation_rate': 0.1, 'crossover_rate': 0.8, 'train_epochs': 200, 'test_epochs': 1000, 'batch': 20}
+GA 2 Training for 100 Generations with Population 4
+GA Best (with genotype 1 1111 HeNormal,0 0000 Uniform,1 1110 Uniform,0 1000 Zeroes,1 0111 Normal): [0.16046878695487976, 0.9879999756813049]
+Saved Figure as "[6]plot_of_ga_accuracies_over_time.pdf"
+Saved Figure as "[7]ga2.pdf"

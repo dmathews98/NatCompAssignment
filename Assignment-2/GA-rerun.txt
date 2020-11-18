@@ -1,0 +1,2 @@
+GA; population_size:I30, time_steps:I100, mutation_rate:F0.1, crossover_rate:F0.8, train_epochs:I200, test_epochs:I1000, batch:I20
+GA; population_size:I4, time_steps:I100, mutation_rate:F0.1, crossover_rate:F0.8, train_epochs:I200, test_epochs:I1000, batch:I20
