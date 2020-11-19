@@ -1,4 +1,5 @@
-SGD; population_size:I30, time_steps:I1000, averaging:I100
-PSO; total_a:F3.9, a1_percent:F0.5, epsilon:F-0.21, population_size:I30, time_steps:I1000, a3:F0
-GA; population_size:I30, time_steps:I100, mutation_rate:F0.1, crossover_rate:F0.8, train_epochs:I200, test_epochs:I1000, batch:I20
-GP; population_size:I4, time_steps:I100, mutation_rate:F0.5, crossover_rate:F0.0, flip_chance:F0.5, whither_rate:F0.1, growth_rate:F0.1, train_epochs:I200, test_epochs:I1000, batch:I20
+DATA_PARAMETER; NOISE:F0.5
+SGD; population_size:I30, time_steps:I100, averaging:I100
+PSO; total_a:F3.9, a1_percent:F0.5, epsilon:F-0.21, population_size:I30, time_steps:I100, a3:F0
+GA; population_size:I30, time_steps:I100, mutation_rate:F0.1, crossover_rate:F0.8, train_epochs:I20, test_epochs:I100, batch:I20
+GP; population_size:I4, time_steps:I100, mutation_rate:F0.5, crossover_rate:F0.0, flip_chance:F0.5, whither_rate:F0.1, growth_rate:F0.1, train_epochs:I20, test_epochs:I100, batch:I20
