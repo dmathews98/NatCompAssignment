@@ -113,7 +113,7 @@ SGD; population_size:I2, time_steps:I2, averaging:I2
 
 The `ALG` is a specifier for what algorithm to use (SGD, PSO, GA, GP), the params correspond to the parameters listed out at the top of this ReadMe, and the 'X' correspond to an identifier specifying the datatype ('I' for int, 'F' for float, 'B' for bool)
 
-Additionally, one can change the parameters listed in `params.py` away from their defaults (this will cause the dataset to regenerate, as some of the parameters control aspects of the data).  These lines are of the form:
+Additionally, one can change the parameters listed in `params.py` away from their defaults (this will cause the dataset to regenerate, as some of the parameters control aspects of the data - note that this will affect all lines below the change!  Changing these parameters are permanent (although you can always manually change them back by adding another parameter change line)).  These lines are of the form:
 
 ```
 DATA_PARAMETER; param:X####
