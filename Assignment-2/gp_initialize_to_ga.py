@@ -38,4 +38,4 @@ def neworg(self):
     return to_return
 
 GP.starting_organism = lambda self: neworg(self)
-run_script('Assignment-2/insanity_check.txt')
+run_script('insanity_check.txt')
