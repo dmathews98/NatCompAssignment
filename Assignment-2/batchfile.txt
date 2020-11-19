@@ -1,4 +1,0 @@
-GP; population_size:I12, time_steps:I1, mutation_rate:F0.5, crossover_rate:F0.1, flip_chance:F0.5, whither_rate:F0.1, growth_rate:F0.1, train_epochs:I100, test_epochs:I1000, batch:I5
-SGD; population_size:I5, time_steps:I10, averaging:I10
-PSO; total_a:F4.04, a1_percent:F0.5, epsilon:F-0.3, population_size:I5, time_steps:I10, a3:F0
-GA; population_size:I12, time_steps:I1, mutation_rate:F0.1, crossover_rate:F0.5, train_epochs:I1, test_epochs:I10, batch:I5

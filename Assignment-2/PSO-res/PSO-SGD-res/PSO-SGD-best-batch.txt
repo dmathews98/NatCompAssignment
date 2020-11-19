@@ -1,9 +1,0 @@
-SGD; population_size:I30, time_steps:I1000, averaging:I100
-SGD; population_size:I30, time_steps:I2000, averaging:I100
-PSO; total_a:F3.4, a1_percent:F0.5, epsilon:F-0.21, population_size:I30, time_steps:I1000, a3:F0
-PSO; total_a:F3.4, a1_percent:F0.5, epsilon:F-0.21, population_size:I30, time_steps:I2000, a3:F0
-DATA_PARAMETER; USE_LINEAR_ONLY_MODEL:BTrue
-SGD; population_size:I30, time_steps:I1000, averaging:I100 
-SGD; population_size:I30, time_steps:I2000, averaging:I100
-PSO; total_a:F3.9, a1_percent:F0.5, epsilon:F-0.25, population_size:I30, time_steps:I1000, a3:F0
-PSO; total_a:F3.9, a1_percent:F0.5, epsilon:F-0.25, population_size:I30, time_steps:I2000, a3:F0

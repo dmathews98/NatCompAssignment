@@ -1,1 +1,0 @@
-PSO; total_a:F3.9, a1_percent:F0.5, epsilon:F-0.25, population_size:I30, time_steps:I2000, a3:F0

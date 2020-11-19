@@ -1,4 +1,0 @@
-PSO; total_a:F3.4, a1_percent:F0.5, epsilon:F-0.01, population_size:I30, time_steps:I1000, a3:F0
-PSO; total_a:F3.3, a1_percent:F0.5, epsilon:F0.04, population_size:I30, time_steps:I1000, a3:F0
-PSO; total_a:F3.2, a1_percent:F0.5, epsilon:F0.08, population_size:I30, time_steps:I1000, a3:F0
-PSO; total_a:F3.1, a1_percent:F0.5, epsilon:F0.12, population_size:I30, time_steps:I1000, a3:F0
